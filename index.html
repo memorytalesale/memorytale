@@ -114,20 +114,22 @@
     </section>
 
 <!-- SECCIÓN: Testimonios ------------------------------------>
+<!-- SECCIÓN: Testimonios -->
 <section class="testimonials-wrapper" id="testimonios">
-  <h2>Lo que dicen quienes ya han regalado una historia</h2>
+  <h2>Emociones reales. Regalos que dejaron huella.</h2>
 
+  <!-- GRID de testimonios -->
   <div class="testimonials-grid">
 
-    <!-- tarjeta 1 -->
+    <!-- Tarjeta 1 -->
     <article class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
 
       <div class="testimonial-header">
         <img src="assets/avatar1.jpg" alt="Avatar usuario" class="testimonial-avatar">
-        <div>
-          <div class="testimonial-author">María</div>
-          <div class="testimonial-recipient">Libro para su madre</div>
+        <div class="testimonial-author">
+          María<br>
+          <span class="detalle-testimonio">Libro para su madre · Mayo 2025</span>
         </div>
       </div>
 
@@ -137,15 +139,15 @@
       </p>
     </article>
 
-    <!-- tarjeta 2 -->
+    <!-- Tarjeta 2 -->
     <article class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
 
       <div class="testimonial-header">
         <img src="assets/avatar2.jpg" alt="Avatar usuario" class="testimonial-avatar">
-        <div>
-          <div class="testimonial-author">Carlos</div>
-          <div class="testimonial-recipient">Libro para su pareja</div>
+        <div class="testimonial-author">
+          Carlos<br>
+          <span class="detalle-testimonio">Libro para su pareja · Febrero 2025</span>
         </div>
       </div>
 
@@ -155,15 +157,15 @@
       </p>
     </article>
 
-    <!-- tarjeta 3 -->
+    <!-- Tarjeta 3 -->
     <article class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
 
       <div class="testimonial-header">
         <img src="assets/avatar3.jpg" alt="Avatar usuario" class="testimonial-avatar">
-        <div>
-          <div class="testimonial-author">Ana</div>
-          <div class="testimonial-recipient">Libro para su hermana</div>
+        <div class="testimonial-author">
+          Ana<br>
+          <span class="detalle-testimonio">Libro para su hermana · Diciembre 2024</span>
         </div>
       </div>
 
@@ -173,10 +175,19 @@
       </p>
     </article>
 
-    <!-- añade más testimonios si lo deseas -->
-  </div><!-- /.testimonials-grid -->
-</section>
+    <!-- …añade más tarjetas si lo deseas… -->
+  </div> <!-- /.testimonials-grid -->
 
+  <!-- MICRO-TESTIMONIOS (ticker) -->
+  <div class="microtestimonios-carousel">
+    <p>“Lloró al leer la primera página.”</p>
+    <p>“Se sintió más querida que nunca.”</p>
+    <p>“Nunca había recibido algo tan personal.”</p>
+    <p>“Lo leímos juntos, lloramos y reímos.”</p>
+    <p>“Dijo: Este libro soy yo.”</p>
+    <p>“Parecía que alguien nos conocía por dentro.”</p>
+  </div>
+</section>
 
 
     <section class="pricing">
@@ -246,52 +257,114 @@
    <div id="form-modal" class="modal">
   <div class="modal-content">
     <span class="close-modal">&times;</span>
+  <!-- ────── NUEVA MARCA DISCRETA ────── -->
+  <span class="marca-formulario">MemoryTale</span>
+<!-- ✅ Título que iremos cambiando con JS -->
+  <h2 id="progress-title" class="progress-title">
+    Crea tu libro personalizado      <!-- solo se verá en el paso 0 -->
+  </h2>
 
-    <!-- ✅ Título dinámico único -->
-    <h2 id="progress-title" class="progress-title">Crea tu libro personalizado</h2>
-
-    <form id="book-form" action="https://hook.eu2.make.com/bamawr2rpu3liznhi5l7g8u4849hfob5" method="POST">
-        <input type="hidden" name="tipo" id="tipo-input" value="">
+  <form id="book-form"
+        action="https://hook.eu2.make.com/bamawr2rpu3liznhi5l7g8u4849hfob5"
+        method="POST">
+    <input type="hidden" name="tipo" id="tipo-input" value="">
       <!-- Aquí van los .form-step -->
 
-                <div class="form-step active" id="intro-step"> 
+               <div class="form-step active" id="intro-step">
   <p>Antes de empezar, cuéntanos un poco de ti para que podamos personalizar tu experiencia.</p>
-  
+
   <div class="form-group">
     <label for="user-name">Tu nombre</label>
     <input type="text" id="user-name" name="user-name" placeholder="Escribe tu nombre..." required>
   </div>
-  
+
   <div class="form-group">
     <label for="user-email">Tu email</label>
     <input type="email" id="user-email" name="user-email" placeholder="Escribe tu email..." required>
   </div>
-  
+
+  <!-- CTA + nota de confianza -->
   <div class="form-navigation">
-    <button type="button" class="btn btn-primary next-btn">Siguiente</button>
+    <button type="button" class="btn btn-primary next-btn">
+      Comenzar mi historia
+    </button>
+  </div>
+
+  <small class="modal-note">
+    ✨ Prometemos no enviarte spam. Solo usaremos tus datos para personalizar tu historia y poder enviarte tu libro.
+  </small>
+</div><!-- /#intro-step -->
+<!-- Paso 2 · Selección de destinatario -->
+<div class="form-step" id="recipient-selection"
+     data-title="¿Para quién es esta historia tan especial?"
+     data-step="0"> <!-- Paso no cuenta como parte del bloque -->
+
+  <p class="progreso">✨ Paso 2 de 9 – Tu historia va tomando forma...</p>
+  <p>
+    Queremos adaptar el libro a vuestra relación única.
+    Elige a quién va dirigido este regalo lleno de emoción.
+  </p>
+
+  <div class="recipient-options">
+    <div class="recipient-option" data-recipient="partner"
+         title="Un regalo lleno de amor para tu pareja">
+      <div class="recipient-label">Pareja</div>
+    </div>
+
+    <div class="recipient-option" data-recipient="child"
+         title="Una historia que tu hijo/a recordará siempre">
+      <div class="recipient-label">Hijo/a</div>
+    </div>
+
+    <div class="recipient-option" data-recipient="parent"
+         title="Hazle sentir todo lo que significa para ti">
+      <div class="recipient-label">Padre/Madre</div>
+    </div>
+
+    <div class="recipient-option" data-recipient="sibling"
+         title="Porque vuestra historia también merece ser contada">
+      <div class="recipient-label">Hermano/a</div>
+    </div>
   </div>
 </div>
-<div class="form-step" id="recipient-selection">
-                    <h3>¿Para quién es el libro?</h3>
-                    <div class="recipient-options">
-                        <div class="recipient-option" data-recipient="partner">
-            
-                            <div class="recipient-label">Pareja</div>
-                        </div>
-                        <div class="recipient-option" data-recipient="child">
-                           
-                            <div class="recipient-label">Hijo/a</div>
-                        </div>
-                        <div class="recipient-option" data-recipient="parent">
-                            
-                            <div class="recipient-label">Padre/Madre</div>
-                        </div>
-                        <div class="recipient-option" data-recipient="sibling">
-                            
-                            <div class="recipient-label">Hermano/a</div>
-                        </div>
-                    </div>
-                </div>
+
+<!-- Paso 3 · Nombre y edad del destinatario -->
+<div class="form-step" id="recipient-name" data-title="¿Cómo te gusta llamarle?" data-recipient="generic">
+  <p class="step-subtitle">
+    El nombre y su edad nos ayudan a contar la historia con el tono justo: como si la escribieras tú.
+  </p>
+
+  <p class="progreso">✨ Paso 3 de 8 – Tu historia está tomando forma...</p>
+
+<div class="form-group">
+  <label for="nombre-destinatario">¿Cómo lo/la llamas?</label>
+  <input
+    type="text"
+    id="nombre-destinatario"
+    name="nombre-destinatario"
+    placeholder="Ej. Mamá, Cariño, Andrés, Peque..."
+    required
+  >
+  <p class="nombre-preview" id="preview-nombre" style="display: none;">
+    Así lo/la llamaremos a lo largo de tu historia.
+  </p>
+</div>
+
+
+  <div class="form-group">
+    <label for="edad-destinatario">¿Cuántos años tiene?</label>
+    <input type="number" id="edad-destinatario" name="edad-destinatario"
+           placeholder="Ej. 45" min="1" max="120" required>
+  </div>
+
+  <div class="form-navigation">
+    <button type="button" class="btn btn-primary next-btn">Seguir personalizando</button>
+  </div>
+</div>
+
+
+
+
 <!-- Preguntas para Pareja --> 
 
 <!-- Pregunta 1 -->
@@ -727,27 +800,69 @@
             </form>
         </div>
     </div>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-column">
+        <div class="footer-logo">MemoryTale</div>
+        <p class="footer-tagline">Creamos recuerdos con alma.</p>
+      </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">MemoryTale</div>
-                <div class="footer-links">
-                    <a href="#">Política de privacidad</a>
-                    <a href="#">Términos de uso</a>
-                    <a href="#">Contacto</a>
-                </div>
-                <div class="footer-social">
-                    <a href="#" aria-label="Instagram"><img src="assets/instagram.svg" alt="Instagram"></a>
-                    <a href="#" aria-label="Facebook"><img src="assets/facebook.svg" alt="Facebook"></a>
-                    <a href="#" aria-label="Twitter"><img src="assets/twitter.svg" alt="Twitter"></a>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <p>&copy; 2025 MemoryTale. Todos los derechos reservados.</p>
-            </div>
+      <div class="footer-column">
+        <h4>¿Necesitas ayuda?</h4>
+        <ul>
+          <li><a href="#">Preguntas frecuentes</a></li>
+          <li><a href="#">Contáctanos</a></li>
+          <li><a href="#">Mapa del sitio</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Sobre MemoryTale</h4>
+        <ul>
+          <li><a href="#">Quiénes somos</a></li>
+          <li><a href="#">Cómo funciona</a></li>
+          <li><a href="#">Sé embajador/a</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Política de cookies</a></li>
+          <li><a href="#">Política de devoluciones</a></li>
+          <li><a href="#">Aviso legal</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Confianza</h4>
+        <ul>
+          <li><a href="#">Opiniones</a></li>
+          <li><a href="#">Valoraciones en Trustpilot</a></li>
+        </ul>
+        <h4>Métodos de pago</h4>
+        <div class="payment-icons">
+          <img src="assets/visa.png" alt="Visa">
+          <img src="assets/master.png" alt="Mastercard">
+          <img src="assets/paypal.png" alt="PayPal">
         </div>
-    </footer>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><img src="assets/instagram.png" alt="Instagram"></a>
+        <a href="#" aria-label="Tiktok"><img src="assets/tiktok.png" alt="Tiktok"></a>
+        <a href="#" aria-label="Pinterest"><img src="assets/facebook.png" alt="Pinterest"></a>
+        <a href="#" aria-label="LinkedIn"><img src="assets/linkedin.png" alt="LinkedIn"></a>
+      </div>
+      <p>&copy; 2025 MemoryTale. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
 
     <script src="js/main.js"></script>
 

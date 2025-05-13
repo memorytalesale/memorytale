@@ -523,53 +523,76 @@ section {
 footer {
   background-color: var(--primary-color);
   color: var(--white);
-  padding: 50px 0 20px;
+  padding: 50px 0 30px;
 }
 
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.footer-column h4 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--white);
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+  color: var(--white);
+  opacity: 0.8;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.footer-column ul li a:hover {
+  opacity: 1;
 }
 
 .footer-logo {
   font-family: var(--font-heading);
   font-size: 1.8rem;
   font-weight: 700;
+  margin-bottom: 10px;
 }
 
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-links a {
-  color: var(--white);
+.footer-tagline {
+  font-size: 0.95rem;
   opacity: 0.8;
+  max-width: 220px;
 }
 
-.footer-links a:hover {
-  opacity: 1;
+.payment-icons img {
+  height: 24px;
+  margin-right: 10px;
+  margin-top: 8px;
 }
 
 .footer-social {
   display: flex;
+  justify-content: center;
   gap: 15px;
+  margin-bottom: 10px;
 }
 
 .footer-social a {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.footer-social a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .footer-social img {
@@ -578,11 +601,12 @@ footer {
   filter: brightness(0) invert(1);
 }
 
-.footer-copyright {
+.footer-bottom {
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   opacity: 0.7;
 }
+
 
 /* Modal */
 .modal {
@@ -627,7 +651,7 @@ footer {
 }
 
 .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 18px;
 }
 
 label {
@@ -914,7 +938,7 @@ small {
 input[type="text"],
 input[type="email"] {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   font-family: var(--font-body);
@@ -1176,3 +1200,129 @@ input[type="email"] {
 
 /* ocultamos flechas si aún existen */
 .carousel-btn{ display:none!important; }
+/* --- Testimonios: fecha contextual --- */
+.detalle-testimonio{
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.9rem;
+  color:#7a6464;
+}
+
+/* --- Micro-testimonios ticker --- */
+.microtestimonios-carousel{
+  display:flex;
+  gap:2rem;
+  overflow:hidden;
+  white-space:nowrap;
+  margin-top:3rem;
+  padding:1rem 0;
+  font-style:italic;
+  font-size:1rem;
+  color:#5B324B;
+  animation:ticker 25s linear infinite;
+}
+
+.microtestimonios-carousel p{
+  display:inline-block;
+  margin:0;
+}
+
+/* Animación horizontal continua */
+@keyframes ticker{
+  0%   { transform:translateX(0);   }
+  100% { transform:translateX(-100%); }
+}
+
+/* Opcional – pausa al pasar el ratón */
+.microtestimonios-carousel:hover{
+  animation-play-state:paused;
+}
+/* Nota de confianza bajo CTA (modal nombre + email) */
+.modal-note {
+  display: block;
+  margin: 12px auto 0;     /* separa del botón y centra */
+  max-width: 70%;
+  font-size: 0.8rem;
+  color: #6b6b6b;          /* gris cálido */
+  text-align: center;
+  font-family: var(--font-body);
+}
+/* Paso de nombre / apodo */
+.step-subtitle {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 1.2rem;
+}
+
+#recipient-name .progreso {
+  font-size: 0.9rem;
+  color: #6b6b6b;
+  margin-bottom: 1.5rem;
+}
+
+/* animación de entrada (fade + slide-up) */
+.form-step {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.form-step.active {
+  opacity: 1;
+  transform: none;
+}
+.progreso{
+ font-size: .9rem;
+ color:#6c6c6c;
+ margin-bottom:1rem;
+}
+.marca-formulario{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;
+  color:#6b4e57;
+  position:absolute;    /* flotando dentro del modal */
+  top:1rem;
+  left:1.5rem;
+  opacity:.8;
+  pointer-events:none;  /* que no estorbe al clic */
+}
+/* Oculta el título en los pasos > 0 */
+.progress-title.hidden {
+  display: none;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: #5c4a50;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #ccc);
+  font-size: 1rem;
+}
+
+.nombre-preview {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+.progreso {
+  font-size: 0.85rem;
+  color: #7a5c63;
+  opacity: 0.85;
+  margin-bottom: 1.5rem;
+}
+
+.form-navigation {
+  margin-top: 2rem;
+}
+
