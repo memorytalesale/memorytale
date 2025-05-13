@@ -13,7 +13,7 @@
   <header class="main-header">
     <div class="container">
         <div class="logo">MemoryTale</div>
-        <nav class="main-nav">
+        <nav class="main-nav" aria-label="Menú principal">
             <ul>
                 <li><a href="#how-it-works">¿Cómo funciona?</a></li>
                 <li><a href="#gallery">Ejemplos</a></li>
@@ -336,32 +336,37 @@
 
   <p class="progreso">✨ Paso 3 de 8 – Tu historia está tomando forma...</p>
 
-<div class="form-group">
-  <label for="nombre-destinatario">¿Cómo lo/la llamas?</label>
-  <input
-    type="text"
-    id="nombre-destinatario"
-    name="nombre-destinatario"
-    placeholder="Ej. Mamá, Cariño, Andrés, Peque..."
-    required
-  >
-  <p class="nombre-preview" id="preview-nombre" style="display: none;">
-    Así lo/la llamaremos a lo largo de tu historia.
-  </p>
-</div>
-
+  <div class="form-group">
+    <label for="nombre-destinatario">¿Cómo lo/la llamas?</label>
+    <input
+      type="text"
+      id="nombre-destinatario"
+      name="nombre-destinatario"
+      placeholder="Ej. Mamá, Cariño, Andrés, Peque..."
+      required
+    >
+    <p class="nombre-preview" id="preview-nombre" style="display: none;">
+      Así lo/la llamaremos a lo largo de tu historia.
+    </p>
+  </div>
 
   <div class="form-group">
-    <label for="edad-destinatario">¿Cuántos años tiene?</label>
-    <input type="number" id="edad-destinatario" name="edad-destinatario"
-           placeholder="Ej. 45" min="1" max="120" required>
+    <label for="edad-destinatario">¿Cuántos años tiene hoy?</label>
+    <input
+      type="number"
+      id="edad-destinatario"
+      name="edad-destinatario"
+      placeholder="Ej. 45"
+      min="1"
+      max="120"
+      required
+    >
   </div>
 
   <div class="form-navigation">
     <button type="button" class="btn btn-primary next-btn">Seguir personalizando</button>
   </div>
 </div>
-
 
 
 

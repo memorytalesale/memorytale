@@ -204,4 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.querySelectorAll('.step, .example, .testimonial, .price-card')
     .forEach(el => observer.observe(el));
-});
+    
+});// ← Cierre de document.addEventListener('DOMContentLoaded', …
+ 
