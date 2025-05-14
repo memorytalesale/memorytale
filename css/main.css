@@ -188,6 +188,7 @@ section {
 }
 
 /* Hero */
+/* === Hero Section Mejorada === */
 .hero {
   position: relative;
   overflow: hidden;
@@ -195,28 +196,52 @@ section {
   padding: 150px 0;
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* sombreado sutil sobre el video */
+  z-index: 1;
+}
+
 .hero-content {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
+  animation: fadeInUp 0.9s ease forwards;
 }
 
 .hero h1 {
   font-size: 3.5rem;
   margin-bottom: 20px;
+  font-family: var(--font-heading);
 }
 
 .hero p {
   font-size: 1.3rem;
   margin-bottom: 40px;
   max-width: 600px;
+  font-family: var(--font-body);
 }
 
 .hero-cta {
   margin-bottom: 60px;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-cta .btn {
+  min-width: 180px;
 }
 
 .hero-image {
@@ -225,6 +250,18 @@ section {
   justify-content: center;
   gap: 30px;
 }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .book-mockup {
   max-height: 300px;
@@ -519,24 +556,27 @@ section {
   padding-bottom: 15px;
 }
 
-/* Footer */
-footer {
-  background-color: var(--primary-color);
-  color: var(--white);
-  padding: 50px 0 30px;
+/* ===== Footer mejorado MemoryTale ===== */
+
+.footer {
+  background-color: #5e374b;
+  color: #f4f4f4;
+  padding: 60px 20px 30px;
+  font-family: 'Inter', sans-serif;
 }
 
-.footer-grid {
+.footer-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 40px;
-  margin-bottom: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footer-column h4 {
-  font-size: 1rem;
-  margin-bottom: 10px;
-  color: var(--white);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
 }
 
 .footer-column ul {
@@ -550,62 +590,94 @@ footer {
 }
 
 .footer-column ul li a {
-  color: var(--white);
-  opacity: 0.8;
+  color: #e0e0e0;
   text-decoration: none;
   font-size: 0.95rem;
+  transition: color 0.3s;
 }
 
 .footer-column ul li a:hover {
-  opacity: 1;
+  color: #ffffff;
 }
 
 .footer-logo {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  margin-bottom: 0.5rem;
 }
 
 .footer-tagline {
   font-size: 0.95rem;
-  opacity: 0.8;
-  max-width: 220px;
-}
-
-.payment-icons img {
-  height: 24px;
-  margin-right: 10px;
-  margin-top: 8px;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+  max-width: 200px;
 }
 
 .footer-social {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 10px;
-}
-
-.footer-social a {
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .footer-social img {
-  width: 20px;
-  height: 20px;
-  filter: brightness(0) invert(1);
+  width: 24px;
+  height: 24px;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.footer-social img:hover {
+  opacity: 1;
+}
+
+.footer-trust {
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  opacity: 0.8;
+}
+
+.footer-trust .stars {
+  color: gold;
+}
+
+.footer-payments {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.footer-payments img {
+  height: 28px;
+  width: auto;
+  max-height: 30px;
+  object-fit: contain;
 }
 
 .footer-bottom {
   text-align: center;
   font-size: 0.85rem;
-  opacity: 0.7;
+  opacity: 0.6;
+  margin-top: 40px;
 }
+
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .footer-column {
+    text-align: left;
+  }
+
+  .footer-social {
+    justify-content: flex-start;
+  }
+}
+
 
 
 /* Modal */
@@ -651,7 +723,7 @@ footer {
 }
 
 .form-group {
-  margin-bottom: 18px;
+  margin-bottom: 1.5rem;
 }
 
 label {
@@ -884,6 +956,29 @@ small {
   .recipient-option {
     width: 80%;
   }
+  .modal-content {
+  width: 95%;
+  padding: 1.5rem 1rem;
+  border-radius: 12px;
+}
+input[type="text"],
+input[type="email"],
+input[type="number"],
+button {
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+button {
+  max-width: 320px;
+  margin: 1rem auto 0;
+  display: block;
+}
+.progreso {
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 1rem;
+}
 }
 
 /* Animations */
@@ -936,14 +1031,19 @@ small {
   z-index: -1;
 }
 input[type="text"],
-input[type="email"] {
+input[type="email"],
+input[type="number"] {
+  max-width: 340px;
   width: 100%;
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  font-family: var(--font-body);
+  margin: 0 auto 1.5rem;
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #ccc);
   font-size: 1rem;
+  font-family: var(--font-body);
 }
+
 /* ========================================
    SECCIÓN “¿CÓMO FUNCIONA?” - MEMORYTALE
    Emocional, elegante y coherente con hero
@@ -1249,10 +1349,12 @@ input[type="email"] {
 }
 /* Paso de nombre / apodo */
 .step-subtitle {
-  font-size: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
   color: var(--text-light);
   margin-bottom: 1.2rem;
 }
+
 
 #recipient-name .progreso {
   font-size: 0.9rem;
@@ -1301,25 +1403,21 @@ input[type="email"] {
   margin-bottom: 0.4rem;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-color, #ccc);
-  font-size: 1rem;
-}
+
 
 .nombre-preview {
-  font-size: 0.85rem;
-  color: #7a5c63;
-  opacity: 0;
+  font-size: 0.85rem;             /* texto más pequeño y discreto */
+  color: #7a5c63;                 /* color suave y emocional */
+  opacity: 0;                     /* inicialmente invisible */
+  transform: translateY(8px);     /* ligeramente más abajo (como "escondido") */
   margin-top: 0.5rem;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;  /* suaviza la aparición */
+}
+.nombre-preview[style*="display: block"] {
+  opacity: 1;                    /* ahora se hace visible */
+  transform: translateY(0);      /* vuelve a su sitio suavemente */
 }
 
-.nombre-preview[style*="display: block"] {
-  opacity: 1;
-}
 
 
 .progreso {

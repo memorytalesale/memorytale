@@ -201,6 +201,15 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+  // Evita que el teclado tape los inputs en móviles
+const allInputs = document.querySelectorAll('input, textarea');
+allInputs.forEach(input => {
+  input.addEventListener('focus', () => {
+    setTimeout(() => {
+      input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  });
+});
 
   document.querySelectorAll('.step, .example, .testimonial, .price-card')
     .forEach(el => observer.observe(el));
