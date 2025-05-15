@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
   const modal = document.getElementById('form-modal');
+    // Si viene desde otra página con #abrir-formulario, abre el modal automáticamente
+  if (window.location.hash === "#abrir-formulario") {
+    setTimeout(() => {
+      if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+    }, 300);
+  }
   const createBookBtn = document.getElementById('create-book-btn');
   const createBookBtnHeader = document.getElementById('create-book-btn-header');
   const closeModal = document.querySelector('.close-modal');
