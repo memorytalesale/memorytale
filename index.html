@@ -44,7 +44,7 @@
             <ul>
                 <li><a href="#how-it-works">¿Cómo funciona?</a></li>
                 <li><a href="#gallery">Ejemplos</a></li>
-                <li><a href="#pricing">Precios</a></li>
+                <li><a href="#precios">Precios</a></li>
                 <li><a href="#faq">FAQ</a></li>
             </ul>
         </nav>
@@ -104,41 +104,84 @@
 
     </div>
   </div>
- <section class="gallery redesigned">
-      <div class="container">
-        <h2>Algunas historias que ya han tocado el corazón de otros</h2>
-        <div class="gallery-grid">
+ <section class="gallery redesigned" id="gallery">
+  <div class="container">
+    <h2>Algunas historias que ya han tocado el corazón de otros</h2>
+    <div class="gallery-grid">
 
-          <!-- Bloque 1 -->
-          <div class="gallery-card">
-            <img src="assets/eje1.png" alt="Ejemplo de portada">
-            <div class="gallery-card-content">
-              <h3>Para mi madre</h3>
-              <p>Aún recuerdo aquella bici rosa. <em>“No era solo equilibrio”,</em> me decías, <em>“te enseño a confiar en ti.”</em></p>
-            </div>
-          </div>
-
-          <!-- Bloque 2 -->
-          <div class="gallery-card">
-            <img src="assets/eje2.png" alt="Ejemplo de portada">
-            <div class="gallery-card-content">
-              <h3>Para mi pareja</h3>
-              <p>Ese día en la playa, cuando me dijiste <em>“quiero que seas mi hogar”</em>. No sabías, pero en ese momento ya eras mi historia favorita.</p>
-            </div>
-          </div>
-
-          <!-- Bloque 3 -->
-          <div class="gallery-card">
-            <img src="assets/eje3.png" alt="Ejemplo de portada">
-            <div class="gallery-card-content">
-              <h3>Para mi hijo</h3>
-              <p>Cuando sostuve tu mano por primera vez, creí que yo te enseñaría. Pero fuiste tú quien me mostró cómo amar de verdad.</p>
-            </div>
-          </div>
-
+      <!-- Bloque 1 -->
+      <a href="#formulario" class="gallery-card open-formulario">
+        <img src="assets/eje1.png" alt="Ejemplo de portada">
+        <div class="gallery-card-content">
+          <h3>Para mi madre</h3>
+          <p>Aún recuerdo aquella bici rosa. <em>“No era solo equilibrio”,</em> me decías, <em>“te enseño a confiar en ti.”</em></p>
         </div>
-      </div>
-    </section>
+      </a>
+
+      <!-- Bloque 2 -->
+      <a href="#formulario" class="gallery-card open-formulario">
+        <img src="assets/eje2.png" alt="Ejemplo de portada">
+        <div class="gallery-card-content">
+          <h3>Para mi pareja</h3>
+          <p>Ese día en la playa, cuando me dijiste <em>“quiero que seas mi hogar”</em>. No sabías, pero en ese momento ya eras mi historia favorita.</p>
+        </div>
+      </a>
+
+      <!-- Bloque 3 -->
+      <a href="#formulario" class="gallery-card open-formulario">
+        <img src="assets/eje3.png" alt="Ejemplo de portada">
+        <div class="gallery-card-content">
+          <h3>Para mi hijo</h3>
+          <p>Cuando sostuve tu mano por primera vez, creí que yo te enseñaría. Pero fuiste tú quien me mostró cómo amar de verdad.</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<style>
+.gallery-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-card-content {
+  padding: 1rem;
+}
+
+.gallery-card .quote {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #5a4a54;
+  margin-top: 0.5rem;
+}
+
+.gallery-card::after {
+  content: "Haz que alguien sienta esto por ti…";
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  font-size: 0.75rem;
+  color: #b28b9c;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-card:hover::after {
+  opacity: 1;
+}
+</style>
+
 
 <!-- SECCIÓN: Testimonios ------------------------------------>
 <!-- SECCIÓN: Testimonios -->
@@ -153,9 +196,9 @@
       <div class="testimonial-stars">★★★★★</div>
 
       <div class="testimonial-header">
-        <img src="assets/avatar1.jpg" alt="Avatar usuario" class="testimonial-avatar">
+       
         <div class="testimonial-author">
-          María<br>
+          María López<br>
           <span class="detalle-testimonio">Libro para su madre · Mayo 2025</span>
         </div>
       </div>
@@ -171,9 +214,9 @@
       <div class="testimonial-stars">★★★★★</div>
 
       <div class="testimonial-header">
-        <img src="assets/avatar2.jpg" alt="Avatar usuario" class="testimonial-avatar">
+      
         <div class="testimonial-author">
-          Carlos<br>
+          Carlos Suárez<br>
           <span class="detalle-testimonio">Libro para su pareja · Febrero 2025</span>
         </div>
       </div>
@@ -189,9 +232,8 @@
       <div class="testimonial-stars">★★★★★</div>
 
       <div class="testimonial-header">
-        <img src="assets/avatar3.jpg" alt="Avatar usuario" class="testimonial-avatar">
         <div class="testimonial-author">
-          Ana<br>
+          Ana Gutiérrez<br>
           <span class="detalle-testimonio">Libro para su hermana · Diciembre 2024</span>
         </div>
       </div>
@@ -217,69 +259,113 @@
 </section>
 
 
-    <section class="pricing">
-        <div class="container">
-            <h2>Nuestros planes</h2>
-            <div class="price-options">
-                <div class="price-card">
-                    <h3>Digital</h3>
-                    <div class="price">9,90 €</div>
-                    <ul>
-                        <li>Libro en formato PDF de alta calidad</li>
-                        <li>Descarga inmediata</li>
-                        <li>Personalización completa</li>
-                        <li>Incluye ilustraciones</li>
-                    </ul>
-                    <button class="btn btn-secondary btn-buy" data-type="digital">Elegir digital</button>
-                </div>
-                <div class="price-card featured">
-                    <div class="most-popular">Más popular</div>
-                    <h3>Impreso</h3>
-                    <div class="price">24,90 €</div>
-                    <ul>
-                        <li>Libro físico de tapa dura</li>
-                        <li>Alta calidad de impresión</li>
-                        <li>Envío a domicilio incluido</li>
-                        <li>Personalización completa</li>
-                        <li>Incluye ilustraciones</li>
-                    </ul>
-                    <button class="btn btn-primary btn-buy" data-type="physical">Elegir impreso</button>
-                </div>
-            </div>
-        </div>
-    </section>
+   <section class="pricing" id="precios"> 
+  <div class="container">
+    <h2>Nuestros planes</h2>
+    <div class="price-options">
 
-    <section class="faq">
-        <div class="container">
-            <h2>Preguntas frecuentes</h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">¿Cómo se genera el libro?</div>
-                    <div class="faq-answer">
-                        <p>Utilizamos inteligencia artificial avanzada para procesar tus respuestas y crear una historia coherente y emotiva. Nuestro equipo editorial supervisa cada libro para garantizar la calidad narrativa.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">¿Puedo editarlo después?</div>
-                    <div class="faq-answer">
-                        <p>Sí, una vez generada la historia, tienes un periodo de 48 horas para solicitar hasta 3 modificaciones sin coste adicional.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">¿Es seguro el pago?</div>
-                    <div class="faq-answer">
-                        <p>Absolutamente. Utilizamos Stripe, uno de los procesadores de pago más seguros del mundo, con encriptación SSL para todas las transacciones.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">¿Cuánto tarda en imprimirse?</div>
-                    <div class="faq-answer">
-                        <p>El proceso de impresión tarda entre 3-5 días laborables. El envío dentro de la península suele tardar 2-3 días adicionales.</p>
-                    </div>
-                </div>
-            </div>
+      <!-- Plan Digital -->
+      <div class="price-card featured">
+        <div class="most-popular">Más popular</div>
+        <h3>Digital</h3>
+        <div class="price">9,90 €</div>
+        <ul>
+          <li>Libro en formato PDF de alta calidad</li>
+          <li>Descarga inmediata</li>
+          <li>Personalización completa</li>
+          <li>Incluye ilustraciones</li>
+        </ul>
+<a href="#formulario" class="btn btn-secondary open-formulario">Elegir digital</a>
+
+</button>
+
+      </div>
+
+      <!-- Plan Impreso -->
+      <div class="price-card">
+        <h3>Impreso</h3>
+        <div class="price">24,90 €</div>
+        <ul>
+          <li>Libro físico de tapa dura</li>
+          <li>Alta calidad de impresión</li>
+          <li>Envío a domicilio incluido</li>
+          <li>Personalización completa</li>
+          <li>Incluye ilustraciones</li>
+        </ul>
+        <button class="btn btn-primary" disabled>Próximamente</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+   <section class="faq" id="faq">
+  <div class="container">
+    <h2>Preguntas frecuentes</h2>
+    <div class="faq-list">
+      
+      <div class="faq-item">
+        <div class="faq-question">¿Cómo se genera el libro?</div>
+        <div class="faq-answer">
+          <p>
+            A partir de tus respuestas, usamos inteligencia artificial sensible para transformar tus palabras en una historia única.  
+            Nuestro equipo humano revisa el resultado para asegurarse de que respira emoción y calidad literaria.
+          </p>
         </div>
-    </section>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">¿Puedo editarlo después?</div>
+        <div class="faq-answer">
+          <p>
+            Sí. Dispones de 48 horas tras la generación del libro para solicitar hasta 3 modificaciones sin coste.  
+            Queremos que la historia refleje justo lo que sientes.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">¿Es seguro el pago?</div>
+        <div class="faq-answer">
+          <p>
+            Totalmente. Usamos Stripe, una de las plataformas más seguras del mundo. Todas las transacciones están encriptadas y protegidas con SSL.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">¿Cuánto tarda en imprimirse?</div>
+        <div class="faq-answer">
+          <p>
+            La impresión toma entre 3 y 5 días laborables. El envío a la península suele demorar entre 2 y 3 días adicionales.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">¿Puedo regalarlo de forma anónima?</div>
+        <div class="faq-answer">
+          <p>
+            Sí, puedes decidir si quieres firmar tu historia o mantener el misterio.  
+            A veces, las palabras llegan más hondo cuando vienen sin nombre.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">¿Puedo incluir una dedicatoria especial?</div>
+        <div class="faq-answer">
+          <p>
+            Por supuesto. Al final del formulario te daremos la opción de escribir una dedicatoria personalizada.  
+            Es el broche perfecto para una historia que nace del corazón.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
    <div id="form-modal" class="modal">
   <div class="modal-content">
@@ -391,6 +477,36 @@
   </div>
 
   <div class="form-navigation">
+    <button type="button" class="btn btn-primary next-btn">Seguir personalizando</button>
+  </div>
+</div>
+<!-- NUEVA SECCION: Paso 4 - Dedicatoria y anonimato -->
+<div class="form-step" id="recipient-dedication" data-title="Tu toque personal">
+  <p class="step-subtitle">
+    Una dedicatoria breve puede abrir el libro con el alma. Y si prefieres mantenerte en el anonimato, también es válido.
+  </p>
+
+  <p class="progreso">✨ Paso 4 de 9 – Cada palabra suma emociones...</p>
+
+  <div class="form-group">
+    <label for="dedicatoria">¿Te gustaría añadir una dedicatoria especial?</label>
+    <textarea
+      id="dedicatoria"
+      name="dedicatoria"
+      placeholder="Para ti, que siempre estuviste cuando más lo necesitaba..."
+      rows="3"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>¿Quieres que este regalo sea anónimo?</label>
+    <div class="radio-group">
+      <label><input type="radio" name="anonimo" value="si" required> Sí</label>
+      <label><input type="radio" name="anonimo" value="no"> No</label>
+    </div>
+  </div>
+
+  <div class="form-navigation">
+    <button type="button" class="btn btn-secondary back-btn">Atrás</button>
     <button type="button" class="btn btn-primary next-btn">Seguir personalizando</button>
   </div>
 </div>
@@ -782,52 +898,62 @@
     <button type="button" class="btn btn-primary next-btn">Finalizar</button>
   </div>
 </div>
-                <!-- Final del formulario -->
-                <div class="form-step" id="form-summary">
-                    <h3>Resumen de tu libro</h3>
-                    <div class="form-summary-content">
-                        <p>Estás creando un libro para: <span id="summary-recipient"></span></p>
-                        <p>Has completado todas las preguntas necesarias para crear una historia única y personalizada.</p>
-                        <p>Al enviar el formulario, comenzaremos a generar tu libro. Este proceso puede tardar unos segundos.</p>
-                    </div>
-                    <div id="submission-error" class="error-message" style="display: none;">
-                        Ha ocurrido un error al enviar el formulario. Por favor, inténtalo de nuevo.
-                    </div>
-                    <div class="form-navigation">
-                        <button type="button" class="btn btn-secondary back-btn">Revisar respuestas</button>
-                        <button type="submit" class="btn btn-primary submit-btn">Crear mi libro</button>
-                    </div>
-                </div>
+               <!-- Final del formulario -->
+<div class="form-step" id="form-summary">
+  <h3>Resumen de tu libro</h3>
+  <div class="form-summary-content">
+    <p>Estás creando un libro para: <span id="summary-recipient"></span></p>
+    <p>Has completado todas las preguntas necesarias para crear una historia única y personalizada.</p>
+    <p>Al enviar el formulario, comenzaremos a generar tu libro. Este proceso puede tardar unos segundos.</p>
+  </div>
+  <div id="submission-error" class="error-message" style="display: none;">
+    Ha ocurrido un error al enviar el formulario. Por favor, inténtalo de nuevo.
+  </div>
+  <div class="form-navigation">
+    <button type="button" class="btn btn-secondary back-btn">Revisar respuestas</button>
+    <button type="submit" class="btn btn-primary submit-btn">Crear mi libro</button>
+  </div>
+</div>
 
-                <!-- Procesando solicitud -->
-                <div class="form-step" id="processing">
-                    <div class="processing-container">
-                        <h3>Estamos generando tu historia...</h3>
-                        <div class="progress-bar">
-                            <div class="progress-fill"></div>
-                        </div>
-                        <p>Esto puede tardar unos segundos. Estamos creando una narración única basada en tus respuestas.</p>
-                    </div>
-                </div>
+<!-- Procesando generación -->
+<div class="form-step" id="processing" style="display: none;">
+  <h3>Estamos creando tu historia…</h3>
+  <p>Esto puede tardar unos segundos. Gracias por tu paciencia ✨</p>
+  <div class="loading-spinner"></div>
+</div>
 
-                <!-- Previsualización -->
-                <div class="form-step" id="preview">
-                    <h3>Previsualización de tu libro</h3>
-                    <div class="book-preview">
-                        <div class="preview-pages">
-                            <div class="preview-page">
-                                <img src="assets/preview-page-1.jpg" alt="Primera página de previsualización">
-                            </div>
-                            <div class="preview-page">
-                                <img src="assets/preview-page-2.jpg" alt="Segunda página de previsualización">
-                            </div>
-                        </div>
-                        <p>Estas son las primeras páginas de tu libro personalizado. Para ver el libro completo, elige una opción de compra:</p>
-                        <div class="preview-actions">
-                            <button type="button" class="btn btn-secondary" id="preview-digital">Digital (9,90 €)</button>
-                            <button type="button" class="btn btn-primary" id="preview-physical">Impreso (24,90 €)</button>
-                        </div>
-                    </div>
+<!-- Previsualización -->
+<div class="form-step" id="preview" style="display: none;">
+  <h3>Previsualización de tu libro</h3>
+
+  <div class="book-preview">
+    <div class="preview-pages">
+      <img id="preview-image" src="" alt="Primera página del libro generado" loading="lazy">
+    </div>
+
+    <p>Así empieza tu historia personalizada. Si te emociona lo que ves, elige tu formato para completar el pedido:</p>
+
+    <div class="preview-actions">
+      <button type="button" class="btn btn-secondary" id="preview-digital">Digital (9,90 €)</button>
+      <button type="button" class="btn btn-primary" id="preview-physical">Impreso (24,90 €)</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Mostrar la sección de previsualización cuando Make haya generado la imagen
+  function mostrarPrevisualizacion(urlImagenGenerada) {
+    const imgPreview = document.getElementById("preview-image");
+    const previewStep = document.getElementById("preview");
+
+    imgPreview.src = urlImagenGenerada;
+    previewStep.style.display = "block";
+  }
+
+  // Simulación para testeo (borrar esto en producción)
+  // mostrarPrevisualizacion("https://via.placeholder.com/400x600.png?text=Previsualizaci%C3%B3n+Libro");
+</script>
+</div>
                 </div>
             </form>
         </div>
@@ -848,8 +974,8 @@
     <div class="footer-column">
       <h4>¿Necesitas ayuda?</h4>
       <ul>
-        <li><a href="#">Preguntas frecuentes</a></li>
-        <li><a href="#">Entregas & devoluciones</a></li>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+        <li><a href="entregas-devoluciones.html">Entregas & devoluciones</a></li>
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
     </div>
@@ -858,8 +984,9 @@
       <h4>Sobre MemoryTale</h4>
       <ul>
         <li><a href="nuestra-historia.html">Quién está detrás de esta historia</a></li>
-        <li><a href="#">Cómo funciona</a></li>
-        <li><a href="#">Sé embajador/a</a></li>
+        <li><a href="como-funciona.html">Cómo funciona</a></li>
+        <li><a href="/embajador.html">Sé embajador/a</a></li>
+        <li><a href="valora.html">Deja tu valoración</a></li>
       
       </ul>
     </div>

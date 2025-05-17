@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <style>
+  .boton-cta, .btn.btn-secondary {
+    background-color: #5e374b;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-block;
+    margin-top: 1rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  .volver-container {
+    text-align: center;
+    margin: 3rem 0;
+  }
+</style>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deja tu valoración | MemoryTale</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    body {
+      background-color: #fff8f6;
+      font-family: 'Quicksand', sans-serif;
+      color: #3e3e3e;
+      max-width: 700px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: #5e374b;
+      text-align: center;
+    }
+    p {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    form {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #5e374b;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+       <div style="text-align:center; margin: 3rem 0;">
+  <a href="index.html" class="btn btn-secondary">Volver</a>
+</div>
+  <h1>¿Te gustó tu libro? Cuéntanos tu experiencia</h1>
+  <p>Tu opinión ayuda a que más personas se animen a regalar emociones.</p>
+
+  <form action="enviar-valoracion.php" method="POST">
+    <label for="nombre">Tu nombre (opcional)</label>
+    <input type="text" id="nombre" name="nombre">
+
+    <label for="relacion">¿Para quién era tu libro?</label>
+    <select id="relacion" name="relacion" required>
+      <option value="">Elige una opción</option>
+      <option>Pareja</option>
+      <option>Hijo/a</option>
+      <option>Padre/Madre</option>
+      <option>Amigo/a</option>
+      <option>Otro</option>
+    </select>
+
+    <label for="valoracion">¿Qué nota le darías?</label>
+    <select id="valoracion" name="valoracion" required>
+      <option value="">Selecciona</option>
+      <option>★★★★★</option>
+      <option>★★★★☆</option>
+      <option>★★★☆☆</option>
+      <option>★★☆☆☆</option>
+      <option>★☆☆☆☆</option>
+    </select>
+
+    <label for="mensaje">¿Qué sentiste al recibir o regalar el libro?</label>
+    <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+    <button type="submit">Enviar mi valoración</button>
+  </form>
+       <div style="text-align:center; margin: 3rem 0;">
+  <a href="index.html" class="btn btn-secondary">Volver</a>
+</div>
+</body>
+</html>

@@ -224,4 +224,14 @@ allInputs.forEach(input => {
     .forEach(el => observer.observe(el));
     
 });// ← Cierre de document.addEventListener('DOMContentLoaded', …
- 
+ document.querySelectorAll('.open-formulario').forEach(card => {
+  card.addEventListener('click', function (e) {
+    e.preventDefault();
+    const modal = document.getElementById('form-modal');
+    if (modal) {
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+});
+
