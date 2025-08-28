@@ -1,0 +1,89 @@
+/* src/App.css */
+/* Estilos base para tu aplicación MemoryTale */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mejoras para la sección hero */
+.hero-section {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-section h1 {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+
+.hero-section p {
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  line-height: 1.6;
+}
+
+/* Estilos para botones mejorados */
+button {
+  font-family: inherit;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Main content flex */
+main {
+  flex: 1;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem !important;
+    padding: 0 20px;
+  }
+  
+  .hero-section p {
+    font-size: 1rem !important;
+    padding: 0 30px;
+  }
+  
+  button {
+    padding: 12px 20px !important;
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 50px 15px !important;
+  }
+  
+  .hero-section h1 {
+    font-size: 1.8rem !important;
+  }
+}

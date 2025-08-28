@@ -1,0 +1,3912 @@
+/* =======================================================
+   VARIABLES GLOBALES DEL SITIO
+   ======================================================= */
+:root {
+  /* --- Colores (Sin cambios) --- */
+  --primary-color: #5e3b4d;
+  --primary-light: #7e5b6d;
+  --primary-dark: #3e1b2d;
+  --secondary-color: #e6c9bc;
+  --secondary-light: #f6e9dc;
+  --secondary-dark: #c6a99c;
+  --text-color: #2c2c2c;
+  --text-light: #6c6c6c;
+  --background-color: #faf7f5;
+  --border-color: #e0ddd9;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --white: #ffffff;
+
+  /* --- Fuentes (Sin cambios) --- */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Lora', serif;
+  --font-accent: 'Quicksand', sans-serif;
+
+  /* --- Estilos y Efectos (Sin cambios) --- */
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --border-radius: 8px;
+
+  /* --- NUEVAS VARIABLES PARA OPTIMIZACIÓN --- */
+  --modal-padding: clamp(1.5rem, 4vw, 2.5rem); /* Padding fluido del modal */
+  --tap-size: 48px;                          /* Tamaño mínimo para áreas táctiles (accesibilidad) */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =======================================================
+   ESTILOS BASE MEJORADOS PARA HTML Y BODY
+   ======================================================= */
+html {
+  font-family: var(--font-body); /* Define la fuente base en el html */
+  scroll-behavior: smooth;      /* Activa el scroll suave */
+}
+
+/* ESTA ES LA ÚNICA REGLA 'body' QUE DEBE QUEDAR (LA DE LA FILA 50, YA MODIFICADA) */
+body {
+  color: var(--text-color);
+  background-color: var(--background-color);
+  line-height: 1.6;
+  font-size: 16px;
+  /* La línea conflictiva ha sido eliminada */
+
+  /* Propiedades para un renderizado de texto más nítido y elegante */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-top: env(safe-area-inset-top);
+    overflow-x: hidden;
+
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  margin-bottom: 20px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+button, .btn {
+  cursor: pointer;
+  font-family: var(--font-accent);
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  border: none;
+  font-size: 1rem;
+  transition: var(--transition);
+  text-align: center;
+  display: inline-block;
+    touch-action: manipulation; /* ✅ LÍNEA AÑADIDA AQUÍ */
+
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--primary-dark);
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-dark);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+section {
+  padding: 80px 0;
+}
+
+/* Header */
+.main-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: env(safe-area-inset-top, 0);
+  z-index: 1000;
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* ¡ESTA ES LA LÍNEA CLAVE QUE ANCLA EL SELECTOR! */
+}
+
+
+.main-header .logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--text-color);
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex; /* Make the list items display in a row */
+  gap: 1.5rem; /* Add spacing between the list items */
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav ul li {
+  display: inline-block; /* Ensure each item behaves as an inline block */
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 500;
+  font-family: var(--font-accent);
+  transition: var(--transition);
+}
+
+.main-nav a:hover {
+  color: var(--primary-color);
+}
+
+.header-btn {
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 0.7rem 1.2rem;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: 600;
+  font-family: var(--font-accent);
+  transition: background 0.3s;
+  margin-left: 1rem; /* Add some space between the nav and the button */
+}
+.header-actions {
+  display: flex;
+  align-items: center; /* Centra verticalmente el selector y el botón */
+  gap: 1.5rem; /* Espacio entre el selector y el botón "Crear mi libro" */
+}
+
+.header-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* Hero */
+/* === Hero Section Mejorada === */
+.hero {
+  position: relative;
+  overflow: hidden;
+  color: var(--white);
+  padding: 150px 0;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* sombreado sutil sobre el video */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeInUp 0.9s ease forwards;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  font-family: var(--font-heading);
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 40px;
+  max-width: 600px;
+  font-family: var(--font-body);
+}
+
+.hero-cta {
+  margin-bottom: 60px;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-cta .btn {
+  min-width: auto;
+  width: auto;
+  padding: 0.75rem 2rem;
+}
+
+
+.hero-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.book-mockup {
+  max-height: 300px;
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  transform: perspective(800px) rotateY(10deg);
+}
+
+.mobile-mockup {
+  max-height: 300px;
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  transform: perspective(800px) rotateY(-10deg);
+}
+
+/* main.css (estilos del bloque rediseñado '¿Cómo funciona?') */
+
+/* RESET LOCAL */
+.how-it-works.redesigned {
+  padding: 4rem 0;
+  background-color: #fffefc;
+  text-align: center;
+}
+
+.how-it-works.redesigned .section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.how-it-works.redesigned .section-subtitle {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  color: #555;
+}
+
+.how-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.how-step {
+  flex: 1 1 300px;
+  max-width: 340px;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.how-step:hover {
+  transform: translateY(-5px);
+}
+
+.how-icon {
+  max-width: 100px;
+  margin-bottom: 1rem;
+}
+
+.how-step h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.how-step p {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+
+
+/* Colores pastel por bloque */
+.pastel-peach {
+  background-color: #ffe9dd;
+}
+
+.pastel-cream {
+  background-color: #fff7df;
+}
+
+.pastel-lavender {
+  background-color: #f5eaff;
+}
+
+/* Animaciones suaves opcionales */
+.animate-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========= Sección Ejemplos de Libros ========= */
+.card-ejemplo {
+  background-color: #ffffff;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(91, 50, 75, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.card-ejemplo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 24px rgba(91, 50, 75, 0.08);
+}
+
+.card-ejemplo img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 1.25rem 1.25rem 0 0;
+  background-color: #f4f4f4;
+}
+
+.card-ejemplo h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  margin: 1rem 1rem 0.5rem;
+  color: #2F1E25;
+}
+
+.card-ejemplo .frase {
+  font-size: 1rem;
+  font-family: 'Quicksand', sans-serif;
+  color: #5B324B;
+  margin: 0 1rem 1.5rem;
+  line-height: 1.6;
+}
+
+.card-ejemplo .frase em {
+  font-style: italic;
+  color: #3A2D30;
+}
+
+/* Sombra al aparecer */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ===================================================
+   CSS DEFINITIVO PARA LA SECCIÓN DE PRECIOS
+   (Combina el layout original con las mejoras de conversión)
+   =================================================== */
+
+.pricing {
+  background-color: var(--background-color);
+}
+
+.price-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.price-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
+  padding: 40px;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+  transition: var(--transition);
+}
+
+.price-card.featured {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 2px solid var(--secondary-color);
+}
+
+.price-card:hover {
+  transform: translateY(-5px);
+}
+
+.price-card.featured:hover {
+  transform: scale(1.05) translateY(-5px);
+}
+
+.most-popular {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.price-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+/* === INICIO DE LAS MEJORAS INTEGRADAS === */
+
+/* Lista de beneficios con viñetas elegantes */
+.price-card .features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  text-align: left;
+}
+
+.price-card .features-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+/* Viñeta de check con el color corporativo */
+.price-card .features-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: var(--primary-color); /* MEJORA: Usamos el color de tu marca */
+  font-weight: 600;
+}
+
+/* Bloque de confianza de pago debajo del botón */
+.secure-payment-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-family: var(--font-accent);
+}
+
+.secure-payment-info img {
+  opacity: 0.7;
+}
+
+/* =================================================================
+   CSS DEFINITIVO PARA EL BLOQUE DE GARANTÍA (SIN CONFLICTOS)
+   ================================================================= */
+
+/* Estilo del contenedor principal */
+.satisfaction-guarantee {
+    max-width: 700px;
+    margin: 60px auto 0;
+    padding: 30px;
+    background-color: #fdfaf8;
+    border: 1px solid #EAD7DD;
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* Estilo para el título: "Tu historia merece ser increíble." */
+.satisfaction-guarantee .guarantee-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color); /* Este está bien, es el #5e3b4d */
+    margin: 0 0 15px 0;
+}
+
+/* Estilo para los párrafos de texto */
+/* ===== CÓDIGO CORREGIDO ===== */
+.satisfaction-guarantee .guarantee-text {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-color); /* <-- La corrección */
+    margin: 0;
+}
+
+/* Añade un pequeño espacio entre los dos párrafos de texto */
+.satisfaction-guarantee .guarantee-text + .guarantee-text {
+    margin-top: 15px;
+}
+
+/* Estilo específico para la palabra final en negrita */
+.satisfaction-guarantee .guarantee-text strong {
+    font-weight: 600;
+}
+
+/* Estos estilos ya los tenías y los mantenemos por compatibilidad */
+.price-coming-soon {
+  display: inline-block;
+  border: 1px solid var(--secondary-dark);
+  color: var(--text-light);
+  font-family: var(--font-accent);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 18px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.notify-form input[type="email"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.notify-form .btn-secondary {
+  width: 100%;
+}
+
+/* =======================================================
+   ✅ FIX: PREGUNTAS FRECUENTES (FAQ) RESPONSIVE
+   ======================================================= */
+
+.faq {
+  background-color: var(--white);
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 40px auto 0;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* El contenedor principal de la pregunta */
+.faq-question {
+  display: flex; /* Pone el texto y el botón en línea */
+  justify-content: space-between; /* Empuja el texto a la izquierda y el botón a la derecha */
+  align-items: center; /* ¡Clave! Alinea verticalmente el texto y el botón '+' */
+  gap: 1rem; /* Añade un espacio de seguridad entre el texto y el botón */
+  padding: 15px 0;
+  cursor: pointer;
+}
+
+/* El texto de la pregunta (envuelto en el nuevo <span>) */
+.faq-question span {
+  flex: 1; /* ¡LA MAGIA! Permite que el texto crezca y ocupe todo el espacio disponible */
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.4; /* Mejora la legibilidad si el texto ocupa dos líneas */
+}
+
+/* El botón '+' (sin apenas cambios) */
+.faq-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: transform 0.3s;
+  flex-shrink: 0; /* Evita que el botón se encoja */
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+/* Cuando JS añade .active, se muestra la respuesta */
+.faq-item.active .faq-answer {
+  max-height: 300px; /* Suficiente espacio para las respuestas */
+  padding-bottom: 15px;
+}
+
+/* Cuando JS añade .active, se rota el botón */
+.faq-item.active .faq-toggle {
+  transform: rotate(45deg); /* Una rotación a 'x' es más elegante que a 180deg */
+}
+
+.faq-toggle:focus {
+  outline: none;
+}
+/* ===== Footer mejorado MemoryTale ===== */
+
+.footer {
+  background-color: #5e374b;
+  color: #f4f4f4;
+  padding: 60px 20px 30px;
+  font-family: 'Inter', sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-column h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #ffffff;
+}
+
+.footer-logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+  max-width: 200px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.footer-social img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.footer-social img:hover {
+  opacity: 1;
+}
+
+.footer-trust {
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  opacity: 0.8;
+}
+
+.footer-trust .stars {
+  color: gold;
+}
+
+.footer-payments {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.footer-payments img {
+  height: 28px;
+  width: auto;
+  max-height: 30px;
+  object-fit: contain;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin-top: 40px;
+}
+
+/* --- MODAL UNIFICADO --- */
+
+
+
+/* --- 5. Elementos DENTRO del header --- */
+.modal-header .progress-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem; /* AJUSTE: Un poco más pequeño */
+  color: var(--white) !important;
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 0 0.25rem 0; /* AJUSTE: Menos margen inferior */
+  line-height: 1.3;
+}
+
+.modal-header-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.95rem; /* AJUSTE: Un poco más pequeño */
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  display: none;
+}
+
+.modal-header .wizard-progress {
+  height: 6px;
+  max-width: 80%;
+  margin: 1rem auto 0; /* AJUSTE: Menos margen superior */
+  display: block;
+  appearance: none;
+  border: none;
+}
+.modal-header .wizard-progress::-webkit-progress-bar {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+.modal-header .wizard-progress::-webkit-progress-value {
+  background-color: var(--secondary-light);
+  border-radius: 4px;
+}
+.modal-header .wizard-progress::-moz-progress-bar {
+  background-color: var(--secondary-light);
+  border-radius: 4px;
+}
+
+/* --- 6. Botón de cerrar y marca "MemoryTale" --- */
+.modal-header .close-modal {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  z-index: 10;
+  background: none;
+  border: none;
+  top: 1rem;
+  right: 1rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.modal-header .close-modal:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  transform: rotate(90deg);
+}
+
+
+
+
+/* =======================================================
+   BLOQUE 2 CORREGIDO: PASOS Y TARJETAS (ANTI-SCROLL)
+   ======================================================= */
+
+/* --- 7. Estilos generales de los pasos del formulario --- */
+.form-step { display: none; }
+.form-step.active { display: block; }
+.form-group { margin-bottom: 1.25rem; } /* AJUSTE: Menos espacio entre grupos */
+
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem; /* AJUSTE: Menos espacio antes de los botones */
+}
+
+
+/* --- 8. PASO 1: SELECCIÓN DE DESTINATARIO (TARJETAS) --- */
+.recipient-options.recipient-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem; /* AJUSTE: Menos espacio entre tarjetas */
+  margin: 0;
+}
+.recipient-options .recipient-option {
+  background-color: var(--white);
+  border: 1px solid #f0e9e6;
+  border-radius: 12px;
+  padding: 1.25rem 1rem; /* AJUSTE: Menos padding */
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: none;
+  min-width: 0;
+}
+.recipient-options .recipient-option:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(94, 59, 77, 0.08);
+}
+.recipient-icon {
+  margin-bottom: 0.5rem; /* AJUSTE: Menos espacio */
+}
+.recipient-icon svg {
+  width: 32px; /* AJUSTE: Iconos más pequeños */
+  height: 32px;
+  fill: var(--primary-light);
+  opacity: 0.9;
+}
+/* =======================================================
+   BLOQUE 3 CORREGIDO: TARJETAS Y CONSEJOS (ANTI-SCROLL)
+   ======================================================= */
+
+/* --- Estilos de los textos de las tarjetas --- */
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem; /* AJUSTE: Más pequeño */
+  font-weight: 500;
+  color: var(--primary-dark);
+  margin: 0 0 0.2rem 0; /* AJUSTE: Menos margen */
+}
+.card-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.8rem; /* AJUSTE: Más pequeño */
+  color: var(--text-light);
+  line-height: 1.4;
+  margin: 0;
+  font-style: italic;
+}
+.recipient-options .recipient-option.selected {
+  border-color: var(--primary-color) !important;
+  background-color: #faf7f5 !important;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(94, 59, 77, 0.1) !important;
+}
+#continue-selection {
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-family: var(--font-accent);
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+  margin: 1.25rem auto 0; /* AJUSTE: Menos margen superior */
+  display: block;
+}
+#continue-selection:disabled {
+  background-color: #e0ddd9 !important;
+  color: #a09d9a !important;
+  cursor: not-allowed !important;
+}
+
+/* --- 9. PASO 2: PANTALLA DE CONSEJOS (COMPACTA) --- */
+#consejos-step .consejos-wrapper {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: left;
+}
+#consejos-step .step-title {
+  margin-bottom: 1.5rem; /* AJUSTE: Menos espacio */
+}
+.consejos-intro-box {
+  background-color: #fdfaf8;
+  border: 1px solid #EAD7DD;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem; /* AJUSTE: Menos padding */
+  margin-bottom: 1.5rem; /* AJUSTE: Menos espacio */
+}
+.consejos-intro-box p {
+  font-family: var(--font-body);
+  font-size: 1rem; /* AJUSTE: Más pequeño */
+  line-height: 1.6;
+  color: #5c4a50;
+  margin-bottom: 1em;
+}
+.consejos-intro-box p:last-child { margin-bottom: 0; }
+.consejos-intro-box strong { font-weight: 600; color: var(--primary-dark); }
+.consejos-list-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem; /* AJUSTE: Más pequeño */
+  color: var(--primary-dark);
+  margin-bottom: 1rem; /* AJUSTE: Menos espacio */
+  padding-left: 10px;
+}
+.consejos-list { list-style: none; padding: 0; margin: 0; }
+.consejos-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 1rem; /* AJUSTE: Menos espacio */
+}
+.consejo-icon { font-size: 1.2rem; line-height: 1.6; }
+.consejos-list li p {
+  font-family: var(--font-body);
+  flex: 1;
+  margin: 0;
+  font-size: 0.95rem; /* AJUSTE: Más pequeño */
+  line-height: 1.5;
+  color: var(--text-color);
+}
+.consejos-list li p strong { color: var(--primary-color); font-weight: 600; }
+
+/* Estilos de botones se mantienen, pero se aplicarán al nuevo .form-navigation */
+#consejos-step .btn {
+  font-family: var(--font-accent);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease-in-out;
+}
+#consejos-step .btn.btn-secondary {
+  border: 1px solid var(--border-color);
+  background-color: #f9f9f9;
+  color: var(--text-color);
+}
+#consejos-step .btn.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+#consejos-step .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+#consejos-step .arrow-icon { transition: transform 0.2s ease-out; }
+#consejos-step .btn-primary:hover .arrow-icon { transform: translateX(4px); }
+#consejos-step .btn-secondary:hover .arrow-icon { transform: translateX(-4px); }
+/* =======================================================
+   BLOQUE 4 CORREGIDO: PASOS DE PREGUNTAS (ANTI-SCROLL)
+   ======================================================= */
+
+/* 1. Título de la pregunta (ahora es el <label>) */
+.question-title {
+  font-family: var(--font-body);
+  font-size: 1rem; /* AJUSTE: Más pequeño */
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 0.5rem; /* AJUSTE: Menos espacio */
+  line-height: 1.4;
+  display: block;
+}
+
+/* 2. Estilo de los inputs de texto y número */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 12px 14px; /* AJUSTE: Menos padding vertical */
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: #fdfcfc;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(94, 59, 77, 0.1);
+}
+
+/* 3. Texto de ayuda/pista debajo del input */
+.field-hint {
+  font-size: 0.85rem; /* AJUSTE: Más pequeño */
+  color: var(--text-light);
+  font-style: normal;
+  margin-top: 0.4rem; /* AJUSTE: Menos espacio */
+  line-height: 1.4;
+  display: block;
+}
+
+/* 4. Estilo de los textos explicativos */
+.form-explanation {
+  background-color: #fdfaf8;
+  border-left: 3px solid var(--secondary-color);
+  padding: 10px 14px; /* AJUSTE: Menos padding */
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem; /* AJUSTE: Más pequeño */
+  color: #5c4a50;
+  line-height: 1.5;
+}
+
+/* 5. Contenedor de cada grupo (label + input + hint) */
+.form-group {
+  margin-bottom: 1.25rem; /* AJUSTE: Menos espacio entre grupos */
+}
+
+/* 6. Ocultar el contador de pasos si está vacío */
+.step-counter:empty {
+  display: none;
+}
+
+/* 7. Estilo del subtítulo dinámico */
+.dynamic-subtitle {
+  font-size: 0.85rem; /* AJUSTE: Más pequeño */
+  color: var(--primary-color);
+  background-color: rgba(94, 59, 77, 0.05);
+  border-left: 3px solid var(--primary-color);
+  padding: 8px 12px;
+  margin-top: 0.75rem; /* AJUSTE: Menos espacio */
+  border-radius: 4px;
+  transition: opacity 0.3s ease;
+  font-style: italic;
+}
+
+
+
+/* --- Estilos residuales que pueden ser necesarios --- */
+.error-message {
+  color: var(--error-color);
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 1px solid var(--error-color);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+}
+
+
+
+
+/* =======================================================
+   BLOQUE 5 CORREGIDO: ANIMACIONES Y ESTILOS GLOBALES
+   ======================================================= */
+
+/* --- Animaciones --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero h1, .hero p, .hero-cta {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.hero p {
+  animation-delay: 0.3s;
+}
+
+.hero-cta {
+  animation-delay: 0.6s;
+}
+
+/* Nota: La clase .step no se usa en el modal, se refiere a la sección "¿Cómo funciona?" de la landing */
+.step, .example, .testimonial, .price-card {
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.step:nth-child(1), .example:nth-child(1), .testimonial:nth-child(1), .price-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.step:nth-child(2), .example:nth-child(2), .testimonial:nth-child(2), .price-card:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.step:nth-child(3), .example:nth-child(3), .testimonial:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+/* --- Estilo del vídeo del Hero --- */
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/*
+  ELIMINADO: Se ha quitado la regla general para `input[type="text"], input[type="email"], input[type="number"]`
+  porque ya hemos definido estilos más específicos y mejores para ellos en el Bloque 4.
+  Mantenerla aquí podría causar conflictos y deshacer los ajustes de espaciado.
+*/
+/* ====================================================================
+   SECCIÓN “¿CÓMO FUNCIONA?” - VERSIÓN FINAL (PALETA 100% CORPORATIVA)
+   ==================================================================== */
+
+.como-funciona {
+  padding: 4rem 1.5rem;
+  background-color: #FFF9F7;
+  text-align: center;
+}
+
+.como-funciona h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #2F1E25;
+  margin-bottom: 0.25rem;
+}
+
+/* Subtítulo centrado y con ancho máximo */
+.como-funciona .subtitulo {
+  font-size: 1.2rem;
+  color: #5B324B;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.pasos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.paso {
+  flex: 1 1 300px;
+  max-width: 340px;
+  padding: 2.5rem 1.5rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid transparent; /* Borde inicial transparente */
+}
+
+.paso:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(94, 59, 77, 0.12);
+}
+
+/* --- PALETA DE COLORES CORPORATIVA Y PROGRESIVA --- */
+
+/* Paso 1: El lienzo en blanco. Elegante y limpio. */
+.paso.paso-1 { 
+  background-color: #ffffff;
+  border-color: #f0e9e6;
+}
+
+/* Paso 2: El recuerdo toma forma. Un tono cálido y sutil de la marca. */
+.paso.paso-2 { 
+  background-color: #f6e9e4; /* Un rosa empolvado muy suave */
+  border-color: #e9d9d4;
+}
+
+/* Paso 3: La emoción final. Un tono lila-vino claro, derivado del color principal. */
+.paso.paso-3 { 
+  background-color: #e9e2e6; /* Un malva/lila muy sofisticado */
+  border-color: #d9d2d6;
+}
+/* ------------------------------------------------ */
+
+.paso-numero {
+  display: inline-block;
+  background-color: #EAD7DD;
+  color: #5B324B;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 2rem;
+}
+
+.paso h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: #2F1E25;
+  margin-bottom: 1rem;
+}
+
+.paso p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #3C2B34;
+  margin-bottom: 0;
+}
+
+.paso img {
+  display: none;
+}
+
+/* ====================================================================
+   SECCIÓN: Historias Reales (VERSIÓN FINAL - AJUSTE DE TAMAÑO)
+   ==================================================================== */
+
+.testimonial-stories {
+  padding: 80px 0;
+  background-color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-stories .section-subtitle {
+  font-family: var(--font-accent);
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-light);
+  margin-bottom: 60px;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  /* ✅ AUMENTAMOS EL ANCHO MÁXIMO PARA QUE LA TARJETA PUEDA SER MÁS GRANDE */
+  max-width: 800px; 
+  margin: 40px auto 0;
+  justify-items: center !important;
+}
+
+.story-card {
+  display: block; /* Layout por defecto para móvil */
+  background: var(--background-color);
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.story-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(94, 59, 77, 0.1);
+}
+
+
+
+/* ESTILOS PARA MÓVIL */
+.story-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #e0d9d5;
+  margin: 0 auto 20px auto;
+}
+
+.story-image video,
+.story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-content {
+  text-align: center;
+}
+
+.story-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.story-stars svg {
+  display: block;
+}
+
+.story-text {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+.story-author {
+  font-family: var(--font-accent);
+}
+
+.story-author strong {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.detalle-testimonio {
+  display: block;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text-light);
+}
+/* Cinta de micro-testimonios se mantiene igual */
+.micro-ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 80px;
+}
+.microtestimonios-carousel {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  animation: ticker 30s linear infinite;
+  font-style: italic;
+  color: #5B324B;
+}
+.microtestimonios-carousel p { margin: 0; }
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+/* --- SECCIÓN MICRO-TESTIMONIOS CORREGIDA --- */
+.micro-ticker-wrapper {
+  width: 100%;
+  overflow: hidden; /* Esto arregla el layout */
+  margin-top: 60px;
+}
+.microtestimonios-carousel {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  padding: 1rem 0;
+  font-style: italic;
+  font-size: 1rem;
+  color: #5B324B;
+  animation: ticker 30s linear infinite;
+}
+.microtestimonios-carousel p { display: inline-block; margin: 0; }
+.microtestimonios-carousel:hover { animation-play-state: paused; }
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Animación más fluida */
+}
+
+
+/* Nota de confianza bajo CTA (modal nombre + email) */
+.modal-note {
+  display: block;
+  margin: 12px auto 0;     /* separa del botón y centra */
+  max-width: 70%;
+  font-size: 0.8rem;
+  color: #6b6b6b;          /* gris cálido */
+  text-align: center;
+  font-family: var(--font-body);
+}
+
+
+#recipient-name .progreso {
+  font-size: 0.9rem;
+  color: #6b6b6b;
+  margin-bottom: 1.5rem;
+}
+
+/* animación de entrada (fade + slide-up) */
+.form-step {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.form-step.active {
+  opacity: 1;
+  transform: none;
+}
+.progreso{
+ font-size: .9rem;
+ color:#6c6c6c;
+ margin-bottom:1rem;
+}
+.marca-formulario{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;
+  color:#6b4e57;
+  position:absolute;    /* flotando dentro del modal */
+  top:1rem;
+  left:1.5rem;
+  opacity:.8;
+  pointer-events:none;  /* que no estorbe al clic */
+}
+/* Oculta el título en los pasos > 0 */
+.progress-title.hidden {
+  display: none;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: #5c4a50;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+
+
+.nombre-preview {
+  font-size: 0.85rem;             /* texto más pequeño y discreto */
+  color: #7a5c63;                 /* color suave y emocional */
+  opacity: 0;                     /* inicialmente invisible */
+  transform: translateY(8px);     /* ligeramente más abajo (como "escondido") */
+  margin-top: 0.5rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;  /* suaviza la aparición */
+}
+.nombre-preview[style*="display: block"] {
+  opacity: 1;                    /* ahora se hace visible */
+  transform: translateY(0);      /* vuelve a su sitio suavemente */
+}
+
+
+
+.progreso {
+  font-size: 0.85rem;
+  color: #7a5c63;
+  opacity: 0.85;
+  margin-bottom: 1.5rem;
+}
+
+.form-navigation {
+  margin-top: 2rem;
+}
+html {
+  scroll-behavior: smooth;
+}
+.loading-spinner {
+  margin: 2rem auto;
+  border: 4px solid #ddd;
+  border-top: 4px solid #b28b9c;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+form input,
+form textarea,
+form button {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* =================================
+   Estilos Logo Mejorado y Flexible
+   ================================= */
+
+/* 1. Controlamos el tamaño del CONTENEDOR del logo */
+.main-header .logo {
+    display: block;
+    max-width: none; /* ← NEUTRALIZADO */
+    width: auto;
+}
+
+.main-header .logo img {
+    width: 100% !important;      /* ← CORREGIDO */
+    max-height: 50px !important; /* ← CORREGIDO */
+    height: auto;
+    vertical-align: middle;
+}
+
+
+
+/* 🎨 Ajustes visuales para el paso de dedicatoria */
+#recipient-dedication .form-group {
+  margin-bottom: 1rem;
+}
+
+#recipient-dedication label {
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+}
+
+#recipient-dedication textarea {
+  margin-bottom: 0.8rem;
+  padding: 12px;
+}
+
+#recipient-dedication .radio-group {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0 0.8rem;
+}
+
+#recipient-dedication .radio-group label {
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+#recipient-dedication .form-navigation {
+  margin-top: 1.5rem;
+}
+
+
+/* =================================
+   Estilos Sección 'Para Quién Es'
+   ================================= */
+.buyer-persona-section {
+  padding: 60px 0;
+  background-color: #fdfaf8; /* Un color de fondo suave para diferenciarla */
+  text-align: center;
+}
+
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* --- CORRECCIÓN ---
+   Cambiamos 'div.persona-card' por 'a.persona-card'
+   y añadimos 'text-decoration: none' para quitar el subrayado.
+*/
+a.persona-card {
+  display: block; /* Hacemos que el enlace se comporte como un bloque */
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  text-decoration: none; /* Quitamos el subrayado del enlace */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+a.persona-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+a.persona-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* --- CORRECCIÓN ---
+   Aseguramos que los colores de los textos dentro del enlace
+   sean los correctos y no el azul por defecto.
+*/
+a.persona-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: #5e3b4d;
+  margin-bottom: 10px;
+}
+
+a.persona-card p {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #6c5f67;
+}
+
+.cta-secondary {
+  margin-top: 50px;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid #5e3b4d;
+    color: #5e3b4d;
+}
+
+.btn-secondary:hover {
+    background-color: #5e3b4d;
+    color: #fff;
+}
+/* =============================================================
+   BLOQUE CSS DEFINITIVO Y UNIFICADO PARA LA SECCIÓN DE PRECIOS
+   ============================================================= */
+
+.pricing {
+  background-color: var(--background-color);
+}
+
+.price-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+
+
+.price-card.featured {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 2px solid var(--secondary-color);
+}
+
+.price-card:hover { transform: translateY(-5px); }
+.price-card.featured:hover { transform: scale(1.05) translateY(-5px); }
+
+.most-popular {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.price-card h3 { font-size: 1.8rem; margin-bottom: 10px; }
+.price { font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; color: var(--primary-color); }
+
+/* Lista de beneficios con viñetas elegantes */
+.price-card .features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  text-align: left;
+}
+
+.price-card .features-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.price-card .features-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Bloque de confianza de pago */
+.secure-payment-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-family: var(--font-accent);
+}
+
+.secure-payment-info img { opacity: 0.7; }
+
+/* Estilos para la tarjeta "Próximamente" */
+.price-coming-soon {
+  display: inline-block;
+  border: 1px solid var(--secondary-dark);
+  color: var(--text-light);
+  font-family: var(--font-accent);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 18px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.notify-form input[type="email"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.notify-form .btn-secondary { width: 100%; }
+
+/* Bloque de garantía de satisfacción */
+.satisfaction-guarantee {
+  max-width: 700px;
+  margin: 60px auto 0;
+  padding: 30px;
+  background-color: #fdfaf8; /* Fondo claro y elegante */
+  border: 1px solid #EAD7DD;   /* Borde sólido y cálido */
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Título de la garantía */
+.satisfaction-guarantee .guarantee-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0 0 15px 0;
+}
+
+/* Texto de la garantía */
+.satisfaction-guarantee .guarantee-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-color); /* Color gris oscuro, no el vino */
+  margin: 0;
+}
+
+.satisfaction-guarantee .guarantee-text + .guarantee-text {
+  margin-top: 15px;
+}
+
+.satisfaction-guarantee .guarantee-text strong {
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+/* =================================
+   Ajustes para Pasos Clicables
+   ================================= */
+a.paso {
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  color: inherit; /* Usa el color de texto por defecto de su padre */
+}
+
+/* Asegura que los textos dentro del enlace mantengan su color original */
+a.paso h3,
+a.paso p {
+  color: #3C2B34; /* O la variable que corresponda si la tienes */
+}
+
+a.paso h3 {
+    color: #2F1E25;
+}
+
+
+/* === MEJORAS FORMULARIO - PASO A PASO (ACTUALIZADO) === */
+
+/* Separación emoji/icono del texto */
+.form-step h2::before,
+.question-title::before {
+    margin-right: 12px !important;
+    display: inline-block !important;
+}
+
+/* Texto explicativo más visible */
+.form-explanation,
+.step-description {
+    color: #4a4a4a !important;          /* Era demasiado claro */
+    font-size: 15px !important;         /* Era muy pequeño */
+    font-weight: 500 !important;        /* Más peso visual */
+    line-height: 1.5 !important;
+    margin-bottom: 20px !important;     /* Más separación */
+    background: #f8f6f4 !important;     /* Fondo sutil */
+    padding: 12px 16px !important;      /* Padding para destacar */
+    border-radius: 8px !important;
+    border-left: 3px solid var(--primary-color) !important; /* Barra lateral */
+}
+
+/* Contador de pasos más prominente */
+/* Estilos base compartidos por ambas etiquetas */
+.progress-title,
+.step-counter {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 25px;
+  background: rgba(94, 59, 77, 0.08);
+  padding: 10px 20px;
+  border-radius: 999px;
+  width: -moz-fit-content; /* Soporte para Firefox */
+  width: fit-content;    /* Hacemos que el bloque sea tan ancho como su texto */
+}
+
+/* MÉTODO DE CENTRADO DIRECTO: Aplicamos a ambas etiquetas */
+.progress-title,
+.step-counter {
+  display: block;        /* Lo tratamos como un bloque */
+  margin-left: auto;     /* Con 'auto' en ambos lados, el navegador lo centra */
+  margin-right: auto;    /* Esto fuerza el centrado horizontal */
+}
+
+/* Títulos de preguntas más suaves (ACTUALIZADO) */
+.question-title {
+    font-size: 18px !important;         /* Reducido de 20px */
+    font-weight: 500 !important;        /* Reducido de 600 */
+    color: #333 !important;             /* Más suave que #2c2c2c */
+    margin-bottom: 8px !important;
+    line-height: 1.4 !important;
+    font-family: var(--font-body) !important; /* Usar fuente del cuerpo */
+}
+
+/* Subtítulo dinámico sin fondo (ACTUALIZADO) */
+.dynamic-subtitle {
+    color: var(--primary-color) !important;             /* Color más sutil */
+    font-style: italic !important;
+    font-size: 14px !important;
+    margin-top: 8px !important;
+    padding: 0 !important;              /* Sin padding */
+    background: none !important;        /* Sin fondo azul */
+    border: none !important;            /* Sin border */
+    font-weight: 500 !important;        /* Poco más de peso */
+}
+
+
+/* Espaciado entre grupos del formulario */
+.form-step .form-group {
+    margin-bottom: 22px !important;     /* Poco más de separación */
+}
+
+/* Explicación más compacta sin perder elegancia */
+.form-explanation {
+    margin-bottom: 18px !important;     /* Separación moderada */
+    line-height: 1.45 !important;       /* Texto menos separado */
+}
+/* === INDICACIÓN VISUAL PARA SELECCIÓN RELACIÓN === */
+.selection-hint {
+    background: #e8f4fd !important;     /* Fondo azul muy suave */
+    border-left: 3px solid #2196f3 !important; /* Borde azul */
+    color: #1565c0 !important;          /* Texto azul */
+    font-size: 14px !important;
+    text-align: center !important;
+    margin-bottom: 25px !important;
+    animation: pulse-hint 2s infinite ease-in-out !important;
+}
+
+/* =======================================================
+   ESTILOS UNIFICADOS PARA LAS PREGUNTAS Y EJEMPLOS
+   ======================================================= */
+
+
+/* --- Contador de pasos tipo píldora --- */
+.step-counter {
+  display: block; /* Para poder centrarlo con margin */
+  width: fit-content;
+  margin: 0 auto 1.5rem auto; /* Centrado y con espacio inferior */
+  background: rgba(94, 59, 77, 0.08);
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+}
+.step-counter:empty {
+  display: none !important;
+}
+
+/* --- Bloque de "Story Coaching" (la guía) --- */
+.story-coaching {
+  background: linear-gradient(135deg, #f8f4ff 0%, #e8f4fd 100%);
+  border-left: 4px solid var(--primary-color);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #495057;
+  box-shadow: 0 2px 8px rgba(94, 59, 77, 0.05);
+}
+.story-coaching strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* --- Desplegable de "Ver ejemplos" --- */
+.ejemplos-inspiracion {
+  margin: 1.25rem 0;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fafafa;
+}
+.ejemplo-trigger {
+  padding: 12px 15px;
+  background: #f8f9fa;
+  color: var(--primary-color);
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  border-bottom: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+.ejemplo-trigger:hover {
+  background: #e2e6ea;
+}
+.ejemplos-contenido {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+.ejemplos-contenido.show {
+  max-height: 600px; /* Suficiente para varios ejemplos */
+}
+.ejemplo-situacion {
+  padding: 1.25rem;
+  border-bottom: 1px solid #f1f3f4;
+}
+.ejemplo-situacion:last-child { border-bottom: none; }
+.ejemplo-situacion h4 {
+  margin: 0 0 0.5rem 0;
+  color: #495057;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.ejemplo-situacion p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-style: italic;
+  line-height: 1.5;
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  border-left: 3px solid #28a745;
+}
+
+/* --- Indicador de calidad de respuesta --- */
+.quality-indicator {
+  margin-top: 1rem;
+  text-align: left;
+}
+.quality-bar {
+  width: 100%;
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.quality-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e6c9bc 0%, #7e5b6d 50%, #5e3b4d 100%);
+  width: 0%;
+  transition: width 0.5s ease;
+  display: block;
+  border-radius: 4px;
+}
+.quality-text {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* --- Textarea --- */
+textarea {
+  min-height: 120px !important;
+  line-height: 1.6 !important;
+  font-size: 1rem !important;
+}
+/* === LIMPIAR PRIMERA INTERFAZ === */
+
+/* Reducir espaciado en step intro */
+#intro-step {
+    padding: 25px 20px !important;
+}
+
+#intro-step .form-group {
+    margin-bottom: 18px !important;
+}
+
+/* Hacer la advertencia más elegante y discreta */
+#intro-step .form-explanation {
+    font-size: 13px !important;
+    padding: 10px 14px !important;
+    margin-bottom: 15px !important;
+    background: #f9f7f6 !important;
+    border-left: 3px solid #d4a574 !important;
+    color: #8b5a2b !important;
+}
+
+/* Compactar inputs */
+#intro-step input {
+    margin-bottom: 8px !important;
+    padding: 14px 16px !important;
+}
+
+/* Botón más elegante */
+#intro-step .btn-primary {
+    margin-top: 15px !important;
+    padding: 16px 32px !important;
+}
+
+/* Nota final más discreta */
+#intro-step .modal-note {
+    font-size: 12px !important;
+    margin-top: 12px !important;
+    line-height: 1.4 !important;
+}
+/* === MEJORAS VISUALES SELECCIÓN === */
+.recipient-option {
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+}
+
+.recipient-option:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(94, 59, 77, 0.2) !important;
+}
+
+.recipient-option.selected {
+    border: 2px solid var(--primary-color) !important;
+    background-color: rgba(94, 59, 77, 0.05) !important;
+    transform: scale(1.02) !important;
+}
+
+/* Botón deshabilitado */
+.btn:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+/* PREFIJOS WEBKIT OBLIGATORIOS PARA SAFARI IOS */
+.element-with-transform {
+    transform: translateX(0);
+    -webkit-transform: translateX(0); /* ¡OBLIGATORIO para Safari! */
+}
+
+.element-with-transition {
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease; /* ¡OBLIGATORIO para Safari! */
+}
+
+/* FIXES ESPECÍFICOS PARA DESPLEGABLES EN IOS */
+.examples-toggle {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    cursor: pointer;
+}
+/* ✅ ESTO ES LO QUE DEBE QUEDAR EN SU LUGAR ✅ */
+/* === ESTILOS PARA LA PANTALLA DE CONSEJOS EMOTIVA === */
+
+#consejos-step .consejos-container {
+  padding: 20px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #fdfcfd;
+  border-radius: 12px;
+}
+
+#consejos-step .consejos-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+  color: var(--primary-color);
+}
+
+#consejos-step .consejos-header svg {
+  width: 28px;
+  height: 28px;
+}
+
+#consejos-step .consejos-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+#consejos-step .consejos-body {
+  margin-bottom: 30px;
+}
+
+#consejos-step .consejos-body p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 1.5em;
+}
+
+#consejos-step .consejos-body strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+#consejos-step .consejos-body em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+#consejos-step .continuar-consejos {
+  width: 100%;
+  max-width: 300px;
+  padding: 15px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+#consejos-step .continuar-consejos:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 15px rgba(94, 59, 77, 0.2);
+}
+/* --- Estilos para el vídeo dentro de la tarjeta de testimonio --- */
+/* --- ESTILOS FINALES Y ROBUSTOS PARA EL VÍDEO EN LA TARJETA --- */
+
+.story-card .story-image {
+  /* ¡LA CLAVE! Le damos una altura fija y razonable a la zona del vídeo. */
+  height: 250px; 
+  /* Aseguramos un fondo por si el vídeo tarda en cargar. */
+  background-color: #e0d9d5; 
+  overflow: hidden; /* Oculta cualquier parte del vídeo que se salga. */
+}
+
+.story-card .story-image video {
+  width: 100%;
+  height: 100%;
+  /* Hace que el vídeo cubra todo el espacio sin deformarse. */
+  object-fit: cover;
+}
+/* ... Estilos anteriores de #consejos-step ... */
+
+/* NUEVOS ESTILOS PARA EL SEPARADOR Y LA PREGUNTA FINAL */
+
+#consejos-step .consejos-divider {
+  border: none;
+  height: 1px;
+  width: 50%;
+  max-width: 150px;
+  margin: 30px auto;
+  background: linear-gradient(to right, transparent, rgba(94, 59, 77, 0.3), transparent); /* Un degradado sutil con tu color primario */
+}
+
+#consejos-step .final-invitation {
+  font-style: italic;
+  color: #555;
+  margin-top: 20px;
+  margin-bottom: 30px !important; /* Importante para asegurar el espacio antes del botón */
+}
+/* ================================================================== */
+/* === INICIO: OPTIMIZACIONES CRÍTICAS PARA MÓVILES Y TABLETS === */
+/* ================================================================== */
+
+/* --- CORRECCIÓN CLAVE: Bloqueo de scroll del body SEGURO --- */
+/* Esta es la forma correcta de evitar el scroll sin romper la página. */
+body.modal-open {
+  overflow: hidden;
+}
+
+
+.main-header {
+  top: env(safe-area-inset-top, 0); /* El header se posiciona debajo del notch */
+}
+
+
+
+
+
+/* --- 4. Ajuste para el botón "Crear mi libro" en el header en móviles --- */
+/* Hacemos el botón un poco más pequeño para que no desborde el menú */
+
+/* ================================================================ */
+/* === FIN: OPTIMIZACIONES CRÍTICAS PARA MÓVILES Y TABLETS === */
+/* ================================================================ */
+/* ========================================================================= */
+/* === INICIO: MEJORA DE DISEÑO DEL FORMULARIO MODAL v2 (DESKTOP) === */
+/* ========================================================================= */
+
+
+#intro-step p {
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  line-height: 1.6;
+  max-width: 550px; /* <--- ¡Punto clave! */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.5rem;
+  font-family: var(--font-body);
+}
+/* =================================================== */
+/* === INICIO: ESTILOS PARA CHECKBOX DE CONSENTIMIENTO === */
+/* =================================================== */
+
+.consent-group {
+  margin: 2rem auto;
+  max-width: 550px;
+  text-align: left;
+  display: flex;
+  align-items: flex-start; /* Alinea el checkbox y el texto por la parte de arriba */
+  gap: 12px; /* Espacio entre el checkbox y el texto */
+}
+
+.consent-group input[type="checkbox"] {
+  /* Hacemos el checkbox un poco más grande y fácil de pulsar */
+  flex-shrink: 0; /* Evita que el checkbox se encoja */
+  width: 1.3em;
+  height: 1.3em;
+  margin-top: 0.2em; /* Alineación vertical fina con el texto */
+  cursor: pointer;
+}
+
+/* El input[type="checkbox"] no hereda de los otros inputs, así que no hay conflicto */
+
+.consent-group label {
+  /* Estos estilos solo afectan a este label específico */
+  font-family: var(--font-accent);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #444;
+  cursor: pointer;
+  margin-bottom: 0; /* Reseteamos el margen que hereda del label global */
+}
+
+.consent-group label a {
+  /* Estos estilos solo afectan a los enlaces de este label */
+  text-decoration: underline;
+  color: var(--primary-color);
+  font-weight: 600; /* Un poco más de peso para destacar */
+}
+
+.consent-group label a:hover {
+  text-decoration: none;
+}
+
+/* =================================================== */
+/* === FIN: ESTILOS PARA CHECKBOX DE CONSENTIMIENTO === */
+
+/* ============================================= */
+/* === FIX: ASEGURAR ESPACIO DEL CONTENIDO PRINCIPAL === */
+/* ============================================= */
+main {
+  min-height: calc(100vh - 150px); /* Ajusta 150px a la altura aproximada de tu header + footer */
+  display: block; /* Asegura que se comporte como un bloque */
+}
+/* ================================================= */
+/* === ESTILOS COOKIES (V-FINAL - A PRUEBA DE TODO) === */
+/* ================================================= */
+
+/* Contenedor principal del banner */
+.cc-window {
+    font-family: 'Quicksand', sans-serif !important;
+    line-height: 1.5em !important;
+}
+
+/* Panel de configuración (oculto por defecto) */
+.cc-settings-panel {
+    display: none;
+    padding: 1em;
+    background: rgba(0,0,0,0.1);
+    border-radius: 5px;
+    margin-top: 1em;
+    text-align: left;
+}
+
+/* Muestra el panel cuando se hace clic */
+.cc-settings-open .cc-settings-panel {
+    display: block !important;
+}
+
+.cc-settings-title {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+.cc-settings-description {
+    font-size: 0.9em;
+    margin-bottom: 1em;
+}
+
+/* Contenedor de los botones */
+.cc-compliance {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 1em !important;
+    margin-top: 1.5em !important;
+}
+
+/* ESTILO BASE Y RESET PARA LOS BOTONES DEL BANNER */
+.cc-compliance .cc-btn {
+    display: inline-flex !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 10px 20px !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    border: 2px solid #e6c9bc;
+    background-color: transparent;
+    color: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Botón de Aceptar Todas (el más importante) */
+.cc-compliance .cc-btn.cc-dismiss {
+    background-color: #e6c9bc !important;
+    color: #5e3b4d !important;
+    order: 3;
+}
+.cc-compliance .cc-btn.cc-dismiss:hover {
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+/* Botón de Permitir Selección (secundario) */
+.cc-compliance .cc-btn.cc-allow {
+    color: #ffffff !important;
+    order: 2;
+}
+.cc-compliance .cc-btn.cc-allow:hover {
+    background-color: #e6c9bc !important;
+    color: #5e3b4d !important;
+}
+
+/* Botón de Rechazar (terciario) */
+.cc-compliance .cc-btn.cc-deny {
+    border: none !important;
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-decoration: underline !important;
+    order: 1;
+}
+.cc-compliance .cc-btn.cc-deny:hover {
+    color: #ffffff !important;
+}
+/* === Visor de libro de ejemplo === */
+
+
+/* barra de progreso del wizard */
+progress.wizard-progress {
+  width: 100%;
+  height: 6px;
+  appearance: none;
+  border: none;
+  margin: 12px 0 20px;
+}
+
+progress.wizard-progress::-webkit-progress-bar {
+  background: #eee;
+  border-radius: 4px;
+}
+
+progress.wizard-progress::-webkit-progress-value {
+  background: #76425e;   /* color principal de tus botones */
+  border-radius: 4px;
+}
+
+/* Firefox */
+progress.wizard-progress::-moz-progress-bar {
+  background: #76425e;
+  border-radius: 4px;
+}
+.field-hint {
+  font-size: 0.8rem;
+  color: #76425e;
+  display: block;
+  margin-top: 4px;
+}
+.field-hint.error { color: #c0392b; }     /* rojo suave cuando hay error */
+.sr-only{
+  position:absolute!important;width:1px;height:1px;
+  padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);
+  border:0;white-space:nowrap;
+}
+small.field-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: #7a5c63;
+  font-style: italic;
+}
+
+
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+/* =======================================================
+   ESTILOS PARA EL CANAL DE INCIDENCIAS (ERROR STEP)
+   ======================================================= */
+.error-container {
+  max-width: 550px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  text-align: center;
+  background-color: #fef3f3; /* Fondo suave de error */
+  border: 1px solid #f8d7da;   /* Borde sutil a juego */
+  border-radius: var(--border-radius);
+  font-family: var(--font-accent);
+}
+
+.error-icon {
+  margin-bottom: 1.5rem;
+}
+
+.error-icon svg {
+  stroke: var(--error-color); /* Usamos tu color de error corporativo */
+}
+
+.error-title {
+  font-family: var(--font-heading);
+  color: var(--primary-dark);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+.error-message strong {
+  color: var(--text-color);
+}
+
+.error-actions {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.error-actions p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+
+
+/* Ajustes para los botones dentro del panel de error */
+#error-step .form-navigation {
+  gap: 1rem; /* Espacio entre los botones */
+}
+
+
+
+/* =======================================================
+   ✅✅✅ VISOR DE EJEMPLOS - CÓDIGO FINAL v3 (CON REFINAMIENTOS)
+   ======================================================= */
+
+/* --- Estilos base (Móvil-Primero) --- */
+.visor-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  box-sizing: border-box;
+
+  /* Estilos con fallback (Sugerencia 1) */
+  background: rgba(44, 44, 44, 0.95); /* Fallback para navegadores antiguos */
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.visor-overlay[hidden] {
+  display: none !important;
+}
+
+.visor-content {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.visor-carrusel {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visor-carrusel img {
+  width: auto; height: auto;
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  display: none;
+}
+
+.visor-carrusel img.activo {
+  display: block;
+  animation: fadeInVisor 0.4s ease;
+}
+
+@keyframes fadeInVisor {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Botones se posicionan DENTRO por defecto (para móvil) */
+.visor-prev,
+.visor-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10000;
+  width: 40px; height: 40px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.visor-prev { left: 10px; }
+.visor-next { right: 10px; }
+
+/* Animación en hover (Sugerencia 2) */
+.visor-prev:hover,
+.visor-next:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.visor-close {
+  position: absolute;
+  top: 10px; right: 10px;
+  z-index: 10;
+  width: 30px; height: 30px;
+  background: none; border: none;
+  font-size: 24px; line-height: 1;
+  color: #888; cursor: pointer;
+  transition: all 0.2s ease;
+}
+.visor-close:hover { color: #111; transform: rotate(90deg); }
+
+.visor-cta {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  width: 90%;
+  max-width: 400px;
+  padding: 16px 20px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: var(--font-accent);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.visor-cta:hover {
+  background-color: var(--primary-dark);
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* Indicador de página (Sugerencia 3) */
+.visor-indicator {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 14px;
+  font-family: var(--font-accent);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 12px;
+  border-radius: 15px;
+  pointer-events: none; /* Para que no interfiera con el click */
+}
+
+
+/* =======================================================
+   ✅ FIX: BANNER DE COOKIES Y MODAL EN MÓVILES
+   ======================================================= */
+
+/* 1. Aseguramos que el banner siempre esté por encima del modal */
+.cc-window {
+  z-index: 10000 !important;
+}
+
+/* 2. Cuando el banner de cookies está visible... */
+body:has(.cc-window:not(.cc-hidden)) .modal-content {
+  padding-bottom: 120px; /* Intenta quitar el !important */
+}
+/* =======================================================
+   ✨ MEJORA: BOTÓN "VER EJEMPLO" EN TARJETAS
+   ======================================================= */
+
+/* Estilo del nuevo botón */
+.ver-ejemplo-btn {
+  display: inline-block; /* Permite aplicar padding y margin */
+  margin-top: 1rem; /* Espacio para separarlo del texto superior */
+  padding: 10px 20px;
+  border: 1px solid var(--secondary-dark); /* Un borde sutil con tu color secundario oscuro */
+  color: var(--primary-color);
+  border-radius: 999px; /* Bordes totalmente redondeados (píldora) */
+  font-family: var(--font-accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.25s ease-in-out; /* Transición suave para todos los cambios */
+  cursor: pointer;
+}
+
+/* Efecto al pasar el ratón por encima de la TARJETA COMPLETA */
+.persona-card:hover .ver-ejemplo-btn {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white);
+  transform: scale(1.05); /* El botón se agranda un poco */
+}
+
+
+
+
+
+
+/* =======================================================
+   ✅ MODAL DEFINITIVO - FUENTE ÚNICA DE VERDAD
+======================================================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+#form-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* ✅ LA CLAVE: Forzamos el ancho aquí para ganar cualquier batalla */
+    max-width: 850px !important; 
+    height: 100%;
+    max-height: 95vh;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    overflow: hidden;
+}
+
+.modal-header {
+    flex-shrink: 0;
+    position: relative;
+    padding: 1.5rem 2rem;
+    background: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    z-index: 10;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+
+}
+
+.modal-body {
+    flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+
+
+
+/* 5. TÍTULOS DE PASO - ESTILO CONSISTENTE */
+/* Esta regla unificada estiliza los títulos de las preguntas.
+   Ya no necesita el 'position: static' porque hemos arreglado la estructura. */
+#form-modal h3.question-title, 
+#title-consejos-step {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  text-align: center;
+  margin: 0 auto 1.5rem;
+  padding: 0;
+  box-shadow: none;
+  background: none;
+}
+/* 5. NAVEGACIÓN DEL FORMULARIO - VERSIÓN CORREGIDA SIN STICKY */
+.form-navigation {
+    background: var(--white) !important;
+    padding: 1.5rem !important;
+    border-top: 1px solid var(--border-color) !important;
+    margin-top: 1rem !important;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.08) !important;
+    /* ELIMINADO: position: sticky y bottom: 0 */
+}
+
+
+
+
+/* 6. BOTONES DEL FORMULARIO - MEJORADOS */
+.form-navigation .btn {
+    min-height: 48px !important;
+    padding: 0.8rem 2rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+
+/* ======================================================= 
+   HEADER OPTIMIZADO PARA MEJOR UX CON MODAL
+======================================================= */
+
+/* 1. HEADER MÁS COMPACTO */
+.main-header {
+    padding: 0.5rem 0 !important; /* Más compacto */
+    z-index: 100 !important; /* Menor que el modal */
+    transition: all 0.3s ease !important;
+}
+
+
+
+/* 3. BOTÓN HEADER MÁS COMPACTO */
+.header-btn {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.9rem !important;
+}
+
+/* 4. OCULTAR HEADER CUANDO MODAL ESTÁ ABIERTO */
+body.modal-open .main-header {
+    transform: translateY(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+
+/* ======================================================= 
+   TARJETAS DE DESTINATARIO MÁS COMPACTAS Y ELEGANTES
+======================================================= */
+
+/* 1. CONTENEDOR PRINCIPAL - MÁS COMPACTO */
+.recipient-options.recipient-grid {
+    gap: 0.75rem !important; /* Menos espacio entre tarjetas */
+    max-width: 580px !important; /* Contenedor más estrecho */
+    margin: 0 auto !important; /* Centrado perfecto */
+}
+
+/* 2. TARJETAS INDIVIDUALES - TAMAÑO OPTIMIZADO */
+.recipient-options .recipient-option {
+    padding: 1rem 0.75rem !important; /* Menos padding interno */
+    min-height: auto !important;
+    max-width: 260px !important; /* Ancho máximo más pequeño */
+    border-radius: 10px !important; /* Bordes más suaves */
+    transition: all 0.3s ease !important;
+}
+
+/* 3. ICONOS MÁS PEQUEÑOS Y SUTILES */
+.recipient-icon {
+    margin-bottom: 0.5rem !important; /* Menos espacio debajo del icono */
+}
+
+.recipient-icon svg {
+    width: 26px !important; /* Iconos más pequeños (eran 32px) */
+    height: 26px !important;
+    opacity: 0.85 !important; /* Más sutiles */
+}
+
+/* 4. TEXTOS MÁS COMPACTOS Y PROPORCIONADOS */
+.card-title {
+    font-size: 1rem !important; /* Título más pequeño */
+    margin-bottom: 0.25rem !important; /* Menos espacio */
+    line-height: 1.3 !important;
+    font-weight: 600 !important;
+}
+
+.card-subtitle {
+    font-size: 0.8rem !important; /* Subtítulo más pequeño */
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    opacity: 0.9 !important;
+}
+
+/* 5. ESTADOS HOVER Y SELECCIÓN - AJUSTADOS */
+.recipient-options .recipient-option:hover {
+    transform: translateY(-2px) !important; /* Menos movimiento, más sutil */
+    box-shadow: 0 6px 18px rgba(94, 59, 77, 0.12) !important;
+}
+
+.recipient-options .recipient-option.selected {
+    transform: translateY(-2px) scale(1.02) !important; /* Menos escala */
+    box-shadow: 0 6px 20px rgba(94, 59, 77, 0.15) !important;
+    border-color: var(--primary-color) !important;
+}
+
+
+
+
+
+/* ======================================================= 
+   REFINAMIENTOS PARA LOS NUEVOS PASOS DIVIDIDOS
+======================================================= */
+
+/* Mensaje de transición entre pasos */
+.transition-message {
+    font-style: italic;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* Invitación final en el paso de consejos */
+.final-invitation {
+    font-style: italic;
+    color: var(--primary-color);
+    font-size: 1.05rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+
+/* ======================================================= 
+   PASOS DE DATOS ESENCIALES - DISEÑO PREMIUM Y LEGAL
+======================================================= */
+
+/* 1. SECCIONES DE DATOS - ORGANIZACIÓN VISUAL */
+.data-section {
+    background: linear-gradient(135deg, #fdfcfd 0%, #f9f7f5 100%);
+    border: 1px solid rgba(94, 59, 77, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.data-section:hover {
+    border-color: rgba(94, 59, 77, 0.15);
+    box-shadow: 0 4px 15px rgba(94, 59, 77, 0.05);
+}
+
+/* 2. TÍTULOS DE SECCIÓN CON ICONOS */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0 0 1.25rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(94, 59, 77, 0.1);
+}
+
+.section-icon {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* 3. OPCIONES DE GÉNERO - DISEÑO MODERNO */
+.gender-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+}
+
+.gender-option {
+    position: relative;
+    cursor: pointer;
+    display: block;
+}
+
+.gender-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.gender-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.75rem;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    background: #fff;
+    transition: all 0.3s ease;
+    min-height: 80px;
+    justify-content: center;
+}
+
+.gender-option:hover .gender-label {
+    border-color: var(--primary-color);
+    background: rgba(94, 59, 77, 0.02);
+    transform: translateY(-2px);
+}
+
+.gender-option input[type="radio"]:checked + .gender-label {
+    border-color: var(--primary-color);
+    background: rgba(94, 59, 77, 0.05);
+    box-shadow: 0 4px 12px rgba(94, 59, 77, 0.1);
+}
+
+.gender-icon {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+
+.gender-text {
+    font-family: var(--font-accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.gender-option input[type="radio"]:checked + .gender-label .gender-text {
+    color: var(--primary-color);
+}
+
+/* 4. NOTA DE PRIVACIDAD */
+.privacy-note {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(94, 59, 77, 0.03);
+    border: 1px solid rgba(94, 59, 77, 0.1);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin: 1.5rem 0;
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+.privacy-icon {
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+.privacy-text {
+    font-family: var(--font-accent);
+    line-height: 1.4;
+}
+
+
+
+
+
+/* ======================================================= 
+   LOGO MEMORYTALE - ESQUINA INFERIOR DERECHA DEL HEADER
+======================================================= */
+
+/* Asegurar positioning relativo en el header */
+.modal-header {
+    position: relative !important;
+    padding-bottom: 2.5rem !important; /* Crear espacio para el logo */
+}
+
+/* Logo perfectamente posicionado */
+.modal-brand {
+    position: absolute !important;
+    bottom: 0.8rem !important;
+    right: 4.5rem !important; /* Espacio suficiente para el botón X */
+    
+    /* Estilo elegante y discreto */
+    font-family: 'Playfair Display', serif !important;
+    font-size: 0.85rem !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.4px !important;
+    font-style: italic !important;
+    
+    /* Comportamiento */
+    z-index: 15 !important;
+    pointer-events: none !important;
+    white-space: nowrap !important;
+    
+    /* Efecto sutil */
+    transition: all 0.3s ease !important;
+    opacity: 0.75 !important;
+}
+
+/* Efecto hover discreto */
+.modal-header:hover .modal-brand {
+    opacity: 1 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+
+
+
+/* ======================================================= 
+   CORRECCIÓN ESPECÍFICA: CENTRADO FORZADO DE SECCIONES PRINCIPALES
+======================================================= */
+
+/* Forzar centrado con selectores de alta especificidad */
+section h2,
+.buyer-persona-section h2,
+.como-funciona h2,
+.testimonial-stories h2,
+.pricing h2,
+.faq h2,
+h2.section-title {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    display: block !important;
+}
+
+/* Selectores ultra-específicos para títulos principales */
+.buyer-persona-section > h2:first-of-type,
+.como-funciona > h2:first-of-type,
+.testimonial-stories > h2:first-of-type {
+    text-align: center !important;
+    display: block !important;
+    width: 100% !important;
+    margin: 0 auto 25px auto !important;
+}
+
+/* Forzar centrado en subtítulos */
+.section-subtitle,
+.como-funciona .subtitulo,
+.testimonial-stories .section-subtitle {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 800px !important;
+}
+
+/* Asegurar que las secciones completas estén centradas */
+.buyer-persona-section,
+.como-funciona,
+.testimonial-stories {
+    text-align: center !important;
+}
+
+/* Centrar contenedores de elementos */
+.persona-grid,
+.pasos-container,
+.story-grid {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}
+/* ======================================================= 
+   🎯 CONTROL DEFINITIVO DEL LOGO - FUENTE ÚNICA DE VERDAD
+======================================================= */
+
+/* Contenedor del logo con tamaño profesional */
+.main-header .logo {
+    display: block !important;
+    max-width: 160px !important;  /* 🎯 AJUSTA ESTE VALOR SEGÚN PREFIERAS */
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important; /* Evita que se encoja en flexbox */
+}
+
+/* Imagen del logo con proporciones perfectas */
+.main-header .logo img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 160px !important;
+    height: auto !important;
+    max-height: 50px !important;
+    object-fit: contain !important;
+    /* vertical-align eliminado - no tiene efecto con display: block */
+}
+
+
+/* Asegurar layout correcto del header */
+.main-header .container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 90% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+
+/* Asegurar centrado perfecto de secciones principales */
+.buyer-persona-section h2,
+.como-funciona h2,
+.testimonial-stories h2,
+.pricing h2 {
+    text-align: center !important;
+    margin: 0 auto 2rem auto !important;
+    width: 100% !important;
+}
+
+/* =======================================================
+   ✅ TOOLTIP DE INFORMACIÓN - VERSIÓN DEFINITIVA
+======================================================= */
+
+.field-hint-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.info-tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.info-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info-icon:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.1);
+}
+
+/* Tooltip con posicionamiento absoluto fijo */
+.tooltip-text {
+    position: fixed !important;
+    z-index: 10000 !important;
+    width: 240px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Estado visible del tooltip */
+.tooltip-text.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Flecha del tooltip - versión inteligente */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+}
+
+/* Flecha apuntando hacia abajo (tooltip arriba del icono) */
+.tooltip-text[style*="--arrow-direction: down"]::after,
+.tooltip-text::after {
+    bottom: -12px;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* Flecha apuntando hacia arriba (tooltip debajo del icono) */
+.tooltip-text[style*="--arrow-direction: up"]::after {
+    top: -12px;
+    border-color: transparent transparent #333 transparent;
+}
+
+/* Estilos para mensajes de conteo de palabras */
+.quality-text.error,
+.quality-text.word-count-warning {
+    color: var(--error-color, #c0392b) !important;
+    font-weight: 600 !important;
+    font-style: normal !important;
+}
+
+.quality-text.error {
+    animation: pulse-error 1.5s ease-in-out;
+}
+
+@keyframes pulse-error {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+/* Animación para selecciones con auto-avance */
+.recipient-card.selected,
+.gender-option input[type="radio"]:checked + .gender-label {
+    animation: selection-confirmed 0.3s ease-out;
+}
+
+@keyframes selection-confirmed {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Transición suave para transformaciones */
+.recipient-card,
+.gender-label {
+    transition: transform 0.3s ease;
+}
+/* =======================================================
+   ✅ EXPANSIÓN DEL CONTENIDO INTERNO DEL FORMULARIO
+   ======================================================= */
+/*
+  Este bloque anula las restricciones de ancho (max-width) que tenía el
+  contenido del formulario, permitiéndole ocupar todo el nuevo
+  espacio disponible en el modal más ancho.
+*/
+/* ====================================================================
+   ✅ SECCIÓN PREVIEW - DISEÑO DE ALTO IMPACTO EMOCIONAL (UNIFICADO)
+   ==================================================================== */
+
+/* --- 1. Títulos y subtítulos que guían al usuario --- */
+#preview .subtitulo-preview {
+  font-family: var(--font-accent);
+  font-size: 1.2rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#preview p:not(.subtitulo-preview) { /* Para el texto "¡Así empezaría..." */
+  font-family: var(--font-body);
+  font-style: italic;
+  text-align: center;
+  color: var(--text-color);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+
+/* --- 2. EL TEXTO DE LA PREVIEW (LA JOYA DE LA CORONA) --- */
+#preview-text {
+  background: none; /* Sin fondo para un look más limpio */
+  border: none; /* Sin borde */
+  padding: 1rem 0;
+  margin: 1rem auto;
+  max-width: 90%;
+  
+  /* Tipografía para máximo impacto */
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.3rem); /* TAMAÑO GRANDE Y FLUIDO */
+  font-weight: 400;
+  color: var(--primary-dark);
+  line-height: 1.6;
+  text-align: center;
+  font-style: normal;
+  white-space: normal;
+}
+
+
+/* --- 3. LA IMAGEN DE LA PÁGINA - ELEGANTE Y CON SOMBRA --- */
+.preview-image-container {
+  text-align: center;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+#preview-image {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  background-color: #f9f9f9;
+}
+
+
+/* --- 4. LOS BOTONES DE ACCIÓN - CLAROS Y DIRECTOS --- */
+.preview-actions {
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+#preview-digital {
+  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+}
+
+/* --- 5. Ocultar el blockquote si está vacío (cuando solo hay imagen) --- */
+#preview-text:empty {
+    display: none;
+}
+
+/* =======================================================
+   ✅ DIFERENCIACIÓN VISUAL PARA EL PASO DEL AUTOR (PASO 4)
+   ======================================================= */
+
+/*
+  Este bloque aplica un ligero cambio de estilo al contenedor de datos
+  del Paso 4 (#author-details-step) para reforzar visualmente el
+  "Giro de Perspectiva" cuando se pregunta por el autor.
+*/
+#author-details-step .data-section {
+    /* Un degradado ligeramente diferente o un color sólido sutil */
+    background: linear-gradient(135deg, #fdfcfd 0%, #f9f7f5 100%);
+    
+    /* Un borde con un tono de tu marca para destacarlo sutilmente */
+    border-color: rgba(126, 91, 109, 0.15); 
+}
+
+/* Opcional: Un pequeño efecto de transición al entrar en este paso */
+#author-details-step.active .data-section {
+    animation: fadeIn Subtle 0.5s ease-out;
+}
+/* === Consolidated Mobile Styles === */
+@media (max-width: 599px) {
+
+  /* 1. Tipografía y layout general */
+  body {
+    font-size: 16px;
+  }
+  .container {
+    width: 95%;
+    padding: 0 10px;
+  }
+  h1, .hero h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+  h2, .hero h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  h3 {
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+  p, .hero p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  /* 2. Paso de formulario: títulos y subtítulos */
+  .step-title,
+  #form-modal .question-title {
+    font-family: var(--font-heading) !important;
+    font-size: 1.4rem !important;
+    color: var(--primary-dark) !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    position: static !important;
+    top: unset !important;
+    background: none !important;
+    z-index: auto !important;
+    text-align: center !important;
+    margin: 0 auto 1.5rem auto !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  .step-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* 3. Modal */
+  .modal {
+    padding: 0;
+  }
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    margin: 0;
+    padding: 1.25rem 1rem;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .modal-header {
+    padding: 1rem 1.25rem;
+  }
+  .modal-body {
+    padding: 1.25rem;
+  }
+  .modal-header .close-modal, 
+  .close {
+    font-size: 1.8rem;
+    top: 0.8rem;
+    right: 1rem;
+  }
+
+  /* 4. Story cards */
+  .story-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 20px;
+  }
+  .story-image {
+    width: 100%;
+    max-width: 250px;
+    height: 250px;
+    margin: 0 auto 20px auto;
+  }
+  .story-content {
+    text-align: center;
+  }
+
+  /* 5. Navegación de formulario */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  .form-navigation,
+  #error-step .form-navigation {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .form-navigation .btn,
+  .form-navigation button,
+  #error-step .btn {
+    width: 100%;
+    margin: 0;
+  }
+
+  /* 6. Selección de destinatario */
+  .recipient-options.recipient-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .recipient-options .recipient-option {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  /* 7. Inputs y campos */
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea,
+  button,
+  .btn {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+  textarea {
+    min-height: 100px !important;
+  }
+
+  /* 8. Paso de consejos */
+  #consejos-step .consejos-intro-box {
+    padding: 1rem;
+  }
+  #consejos-step .consejos-list-title {
+    font-size: 1.1rem;
+  }
+
+  .story-coaching {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+  .ejemplo-trigger {
+    padding: 10px;
+  }
+  .ejemplo-situacion {
+    padding: 1rem;
+  }
+
+  /* 9. Footer y llamadas finales */
+  .transition-message,
+  .final-invitation {
+    font-size: 0.9rem;
+    margin-top: 1.25rem;
+  }
+}
+@media (min-width: 600px) and (max-width: 899px) {
+  
+  /* 1. Container y modal */
+  .container {
+    width: 90%;
+  }
+  .modal-content {
+    max-width: 90%;
+    padding: 2rem;
+  }
+
+  /* 2. Tipografía intermedia */
+  h1 {
+    font-size: 2.2rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  .step-title,
+  #form-modal .question-title {
+    font-size: 1.6rem !important;
+  }
+
+  /* 3. Navegación del formulario */
+  .form-navigation {
+    padding: 1.25rem 2rem;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  /* 4. Grid de destinatarios */
+  .recipient-options.recipient-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .recipient-options .recipient-option {
+    padding: 1rem;
+  }
+
+  /* 5. Story cards */
+  .story-card {
+    display: grid;
+    grid-template-columns: 180px auto;
+    gap: 24px;
+    align-items: center;
+    padding: 30px;
+  }
+  .story-image {
+    width: 180px;
+    height: 240px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  .story-content {
+    text-align: left;
+  }
+
+  /* 6. Inputs */
+  input, textarea, select {
+    font-size: 1rem;
+    padding: 0.9rem 1.1rem;
+  }
+
+  /* 7. Footer */
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+@media (min-width: 900px) {
+
+  /* 1. Container y modal */
+  .container {
+    width: 85%;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .modal-content {
+    max-width: 850px;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+  }
+
+  /* 2. Títulos más amplios */
+  h1 {
+    font-size: 2.8rem;
+  }
+  h2 {
+    font-size: 2.2rem;
+  }
+  h3 {
+    font-size: 1.6rem;
+  }
+  .step-title,
+  #form-modal .question-title {
+    font-size: 1.8rem !important;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  /* 3. Story cards */
+  .story-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 40px;
+    text-align: left;
+  }
+  .story-image {
+    width: 200px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 14px;
+  }
+
+  /* 4. Formularios más espaciosos */
+  .form-step .form-group,
+  .form-navigation,
+  .story-coaching,
+  .recipient-options.recipient-grid {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .form-navigation {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+
+  /* 5. Grid de destinatarios más amplio */
+  .recipient-options.recipient-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .recipient-options .recipient-option {
+    padding: 1.5rem 1rem;
+  }
+
+  /* 6. Footer más denso */
+  .footer-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* 7. Inputs adaptados */
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 1.05rem;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+  }
+
+  textarea {
+    min-height: 120px;
+    max-height: 240px;
+    line-height: 1.6;
+  }
+
+}
+@media screen and (max-width: 414px) and (-webkit-min-device-pixel-ratio: 2) {
+  
+  .modal-header .progress-title {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .modal-header-subtitle {
+    font-size: 0.85rem;
+  }
+
+  #form-modal .question-title,
+  #consejos-step .step-title {
+    font-size: 1.1rem;
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.8rem;
+  }
+
+  .form-navigation {
+    margin-top: 1rem;
+  }
+
+  button, .btn {
+    padding: 12px 18px;
+  }
+}
+@media (orientation: landscape) and (max-height: 550px) {
+
+  .modal-content {
+    max-height: 95vh;
+    margin: 2.5vh auto;
+  }
+
+  .modal-header {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .modal-body {
+    padding: 1rem 1.5rem;
+  }
+
+  .modal-header .progress-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .modal-header-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .modal-header .wizard-progress {
+    margin-top: 0.5rem;
+    height: 4px;
+  }
+
+  #form-modal .question-title,
+  .step-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.75rem;
+  }
+
+  input, textarea, select {
+    padding: 8px 10px;
+    font-size: 0.95rem;
+  }
+
+  textarea {
+    min-height: 60px !important;
+    line-height: 1.4;
+  }
+
+  .field-hint, .quality-text {
+    font-size: 0.75rem;
+    margin-top: 2px;
+  }
+
+  .story-coaching, .consejos-intro-box {
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .recipient-options.recipient-grid {
+    gap: 0.5rem;
+  }
+
+  .recipient-option {
+    padding: 0.75rem;
+  }
+
+  .recipient-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .card-title { font-size: 1rem; }
+  .card-subtitle { font-size: 0.75rem; line-height: 1.3; }
+
+  .form-navigation {
+    margin-top: 1rem;
+  }
+
+  button, .btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    min-height: auto;
+  }
+}
