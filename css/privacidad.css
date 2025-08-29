@@ -1,10 +1,25 @@
-body {
-  background-color: #fff9f8;
-  color: #2c2c2c;
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
+/* START OF SIMPLIFIED PRIVACIDAD.CSS (NO STICKY FOOTER) */
+
+
+/* ======== NUEVO ESTILO ÚNICO PARA EL CONTENIDO LEGAL ======== */
+/* ================================================================= */
+/* === ESTILO MAESTRO PARA CAJAS DE CONTENIDO (USAR EN TODAS LAS PÁGINAS) === */
+/* ================================================================= */
+.content-box {
+  max-width: 800px; /* Ancho máximo para el contenido */
+  margin: 3rem auto; /* 3rem de espacio arriba/abajo, y 'auto' para centrar */
+  padding: 2.5rem 3rem; /* Espacio interno generoso */
+  background-color: #ffffff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+  border-radius: 12px;
+}
+
+/* Ajuste específico para pantallas pequeñas */
+@media (max-width: 768px) {
+  .content-box {
+    padding: 1.5rem;
+    margin: 2rem auto;
+  }
 }
 
 h1 {
@@ -22,11 +37,24 @@ h2 {
   margin-bottom: 0.6rem;
   color: #5e374b;
   font-weight: 600;
+  font-family: 'Playfair Display', serif;
+}
+
+/* REGLA CORREGIDA Y MÁS ESPECÍFICA */
+.content-box p {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  color: #3e3e3e;
+  margin-bottom: 1rem;
+  line-height: 1.6;
 }
 
 ul {
   padding-left: 1.5rem;
   margin-bottom: 1rem;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  color: #3e3e3e;
 }
 
 a {
@@ -38,30 +66,258 @@ a:hover {
   text-decoration: none;
 }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1.5rem 1rem 2rem;
-  background-color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  border-radius: 8px;
+
+
+/* Estilos de .volver-container y .volver-link */
+/* En privacidad.css, reemplaza las reglas de .volver-link y .volver-link:hover */
+/* En privacidad.css, reemplaza las reglas de .volver-link y .volver-link:hover */
+.volver-link {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600; /* Más peso */
+  font-size: 0.95rem;
+  color: #5e374b; /* Color de texto morado */
+  background-color: transparent; /* Sin fondo */
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px; /* Menos redondeado */
+  border: 1px solid #5e374b; /* Borde del color del texto */
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
+
+.volver-link:hover {
+  background-color: #fdf2f5; /* Fondo rosa muy pálido al pasar el ratón */
+  color: #3e1b2d;
+  border-color: #3e1b2d;
+  text-decoration: none;
+}
+/* === ESTILOS UNIFICADOS PARA FORMULARIOS === */
+form {
+  background-color: #fff6f6;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid #f0e7e7;
+  margin: 2rem auto;
+  max-width: 600px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+form label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+  text-align: left;
+  font-size: 1rem;
+  color: #5e374b;
+  font-family: 'Quicksand', sans-serif;
+}
+
+form input[type="text"],
+form input[type="email"],
+form select,
+form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e8dcdc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Quicksand', sans-serif;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #d8bfc6;
+  background-color: #fdf2f5;
+}
+
+form select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="10" height="5" xmlns="http://www.w3.org/2000/svg"><path fill="%235e374b" d="M0 0l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 10px 5px;
+}
+
+form button[type="submit"] {
+  all: unset;
+  display: block;
+  width: auto;
+  margin: 1.5rem auto 0;
+  background-color: #5e374b;
+  color: #fff;
+  font-weight: 600;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.8rem 2.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+  background-color: #472b3a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+/* === FIN ESTILOS UNIFICADOS PARA FORMULARIOS === */
 
 .footer-bottom {
   background-color: #5e374b;
-  color: #fff;
+  color: #ffffff; /* Color por defecto para el texto dentro del footer */
   text-align: center;
   font-size: 0.9rem;
   padding: 1.5rem 1rem;
-  opacity: 0.7;
+  /* opacity: 0.7; Ya lo quitamos, bien */
   margin-top: 2rem;
+  width: 100%;
 }
 
-.logo {
-  font-size: 1.5rem;
+/* ===== AÑADE ESTA NUEVA REGLA ===== */
+.footer-bottom p {
+  color: #ffffff; /* Fuerza el color blanco para los párrafos dentro del footer */
+  font-size: 0.9rem; /* Opcional: si quieres que el texto del p coincida con el font-size del footer */
+  margin-bottom: 0; /* Opcional: quita el margen inferior del párrafo si no lo quieres en el footer */
+}
+/* ===== FIN DE LA NUEVA REGLA ===== */
+.paso-titulo { /* Estilo para "Paso 1", "Paso 2", etc. */
   font-family: 'Playfair Display', serif;
-  font-weight: bold;
   color: #5e374b;
-  margin: 0.5rem 0 0.5rem;
-  padding-left: 1rem;
+  font-size: 1.4rem; /* Un poco más pequeño que H2 general */
+  margin-top: 0;
+  margin-bottom: 0.3rem;
+}
+
+.paso-subtitulo { /* Estilo para el subtítulo de cada paso */
+  font-family: 'Playfair Display', serif;
+  color: #4a2c3d; /* Un tono ligeramente diferente */
+  font-size: 1.2rem; /* Un poco más pequeño que H3 general */
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+}
+/* ============================================= */
+/* ESTILOS PARA LA TABLA Y ENLACE DE COOKIES     */
+/* ============================================= */
+
+.cookies-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden; /* Para que el border-radius se aplique bien */
+}
+
+.cookies-table thead tr {
+  background-color: #5e3b4d; /* Tu color primario */
+  color: #ffffff;
+  text-align: left;
+  font-weight: 600;
+}
+
+.cookies-table th,
+.cookies-table td {
+  padding: 12px 18px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cookies-table tbody tr {
+  background-color: #ffffff;
+}
+
+.cookies-table tbody tr:nth-of-type(even) {
+  background-color: #faf7f5; /* Tu color de fondo de body */
+}
+
+.cookies-table tbody tr:last-of-type {
+  border-bottom: 2px solid #5e3b4d;
+}
+
+.reconfig-cookies-link {
+    display: inline-block;
+    margin-top: 0.5em;
+    padding: 10px 18px;
+    background-color: #e6c9bc; /* Tu color secundario */
+    color: #5e3b4d; /* Tu color primario */
+    text-decoration: none;
+    border-radius: 50px; /* Estilo píldora */
+    font-weight: 600;
+    font-family: 'Quicksand', sans-serif;
+    transition: all 0.2s ease-in-out;
+}
+
+.reconfig-cookies-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+/* ============================================= */
+/* === ESTILOS PARA EL MODAL DE NOTIFICACIÓN === */
+/* ============================================= */
+.custom-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Por encima de todo */
+}
+
+.custom-alert-box {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+  text-align: center;
+  max-width: 90%;
+  width: 400px;
+}
+
+.custom-alert-box p {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.1rem;
+  color: #3e3e3e;
+  margin-bottom: 1.5rem;
+}
+.custom-alert-box p:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.custom-alert-box button {
+  all: unset; /* Reseteamos estilos */
+  background-color: #5e3b4d; /* Tu color primario */
+  color: #ffffff;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-alert-box button:hover {
+  background-color: #3e1b2d; /* Tu color primario oscuro */
 }

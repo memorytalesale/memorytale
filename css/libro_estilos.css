@@ -1,0 +1,350 @@
+/* === INICIO DE DECLARACIONES @font-face === */
+
+/* --- Playfair Display --- */
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('https://memorytale.es/fonts/PlayfairDisplay-Regular.ttf') format('truetype');
+    font-weight: 400; /* Normal */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('https://memorytale.es/fonts/PlayfairDisplay-Italic.ttf') format('truetype');
+    font-weight: 400; /* Normal */
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('https://memorytale.es/fonts/PlayfairDisplay-Bold.ttf') format('truetype');
+    font-weight: 700; /* Bold */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('https://memorytale.es/fonts/PlayfairDisplay-BoldItalic.ttf') format('truetype');
+    font-weight: 700; /* Bold */
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('https://memorytale.es/fonts/PlayfairDisplay-Black.ttf') format('truetype');
+    font-weight: 900; /* Black */
+    font-style: normal;
+}
+
+/* --- Lora --- */
+@font-face {
+    font-family: 'Lora';
+    src: url('https://memorytale.es/fonts/Lora-Regular.ttf') format('truetype');
+    font-weight: 400; /* Normal */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lora';
+    src: url('https://memorytale.es/fonts/Lora-Italic.ttf') format('truetype');
+    font-weight: 400; /* Normal */
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Lora';
+    src: url('https://memorytale.es/fonts/Lora-Bold.ttf') format('truetype');
+    font-weight: 700; /* Bold */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lora';
+    src: url('https://memorytale.es/fonts/Lora-BoldItalic.ttf') format('truetype');
+    font-weight: 700; /* Bold */
+    font-style: italic;
+}
+
+/* --- Quicksand --- */
+@font-face {
+    font-family: 'Quicksand';
+    src: url('https://memorytale.es/fonts/Quicksand-Regular.ttf') format('truetype');
+    font-weight: 400; /* Normal */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url('https://memorytale.es/fonts/Quicksand-Light.ttf') format('truetype');
+    font-weight: 300; /* Light */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url('https://memorytale.es/fonts/Quicksand-Medium.ttf') format('truetype');
+    font-weight: 500; /* Medium */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url('https://memorytale.es/fonts/Quicksand-SemiBold.ttf') format('truetype');
+    font-weight: 600; /* SemiBold */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url('https://memorytale.es/fonts/Quicksand-Bold.ttf') format('truetype');
+    font-weight: 700; /* Bold */
+    font-style: normal;
+}
+
+/* === FIN DE DECLARACIONES @font-face === */
+
+/* === PORTADA (cover-page) === */
+.cover-page {
+    background-color: #333;
+    background-image: url('https://memorytale.es/assets/libro_imagenes/preview.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: flex-start;
+    padding-left: 20mm;
+}
+
+.cover-page .content {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 15mm;
+    border-radius: 5px;
+    width: auto;
+    max-width: 60%;
+}
+
+.cover-page h1 {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    font-size: 32pt;
+    margin-bottom: 5mm;
+}
+
+.cover-page p {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    color: #f0f0f0;
+    font-size: 14pt;
+}
+
+/* === PÁGINA DE DEDICATORIA (dedication-page) === */
+.dedication-page {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('https://memorytale.es/assets/libro_imagenes/preview.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.dedication-page .content {
+    max-width: 120mm;
+}
+
+.dedication-page p {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 14pt;
+    color: #444;
+    line-height: 1.8;
+}
+
+/* === PÁGINAS DE CONTENIDO (story-content-wrapper) === */
+.story-content-wrapper {
+    justify-content: flex-start;
+    padding-top: 15mm;
+    background-image: url('https://memorytale.es/assets/libro_imagenes/preview.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#cuerpo-principal-historia h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24pt;
+    color: #3b2d38;
+    text-align: left;
+    margin-bottom: 8mm;
+}
+
+#cuerpo-principal-historia h3 {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 18pt;
+    color: #5e3b4d;
+    margin-top: 10mm;
+    margin-bottom: 6mm;
+}
+
+/* === PÁGINA DE CONCLUSIÓN (conclusion-page) === */
+.conclusion-page {
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://memorytale.es/assets/libro_imagenes/preview.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.conclusion-page .content-flex {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 15mm;
+    gap: 15mm;
+}
+
+.conclusion-page .text-column {
+    flex: 1;
+}
+
+.conclusion-page .image-column {
+    flex: 1;
+    text-align: center;
+}
+
+.conclusion-page .image-column img {
+    max-width: 100%;
+    max-height: 100mm;
+    object-fit: cover;
+}
+
+.conclusion-page #pagina-conclusion-texto h2 {
+     font-family: 'Playfair Display', serif;
+     font-size: 22pt;
+     margin-bottom: 6mm;
+}
+
+/* === CONTRAPORTADA (back-cover-page) === */
+.back-cover-page {
+    background-color: #f5f5f5;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-cover-page p {
+    font-size: 10pt;
+    color: #666;
+}
+
+.back-cover-page .brand-footer {
+    margin-top: 10mm;
+    font-weight: bold;
+    color: #5e3b4d;
+}
+
+/* === CONFIGURACIÓN GENERAL Y DE PÁGINA (A5 Apaisado) === */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: #333;
+    background-color: #fff;
+}
+
+@page {
+    size: 210mm 148mm;
+    margin: 15mm;
+
+    @bottom-right {
+        content: counter(page);
+        font-size: 9pt;
+        color: #777;
+        padding-bottom: 5mm;
+        padding-right: 5mm;
+    }
+}
+
+@page :first {
+    @bottom-right {
+        content: "";
+    }
+    margin: 0;
+}
+
+.page {
+    width: 210mm;
+    height: 148mm;
+    page-break-before: always;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.page:first-of-type {
+    page-break-before: auto;
+}
+
+.page .content {
+    padding: 0 15mm;
+    width: calc(100% - 30mm);
+    margin: 0 auto;
+    max-width: 180mm;
+}
+
+.page .content-full-bleed {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+h1, h2, h3, .title-font {
+    font-family: 'Playfair Display', serif;
+    color: #2c2c2c;
+    font-weight: 700;
+}
+
+h1 { font-size: 28pt; line-height: 1.2; margin-bottom: 10mm; }
+h2 { font-size: 20pt; line-height: 1.3; margin-top: 10mm; margin-bottom: 7mm; }
+h3 { font-size: 16pt; line-height: 1.3; margin-top: 8mm; margin-bottom: 5mm; }
+
+p, li, span {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #333;
+    widows: 2;
+    orphans: 2;
+}
+
+p {
+    margin-bottom: 5mm;
+}
+
+.text-center { text-align: center; }
+
+h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
+figure, img, table, blockquote { page-break-inside: avoid; }
+
+/* === MARCA DE AGUA MEMORYTALE === */
+.page::after {
+    content: "MemoryTale";
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Lora', serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: #666666;
+    opacity: 0.4;
+    z-index: 1000;
+    letter-spacing: 1px;
+}
