@@ -1300,8 +1300,9 @@ Categorías:
 6. "style_selection" - El usuario indica el estilo del libro (ej. "estiloa", "estilob").
 
 REGLAS CRÍTICAS:
-- La categoría "help_request" tiene prioridad si el mensaje es una pregunta o duda, incluso si contiene palabras de otras categorías.
-- "story_response" es SOLO para respuestas a las 6 preguntas sobre el libro.
+- La categoría "help_request" tiene MÁXIMA PRIORIDAD si el mensaje contiene "¿", "cuánto", "precio", "cuesta", "costo", "cuándo", "dónde", "cómo", "qué", "ayuda", "duda", "pregunta", "puedo", "se puede", "información" - incluso durante el paso "questions".
+- "story_response" es SOLO para respuestas narrativas/descriptivas que claramente responden a las preguntas del flujo del libro (recuerdos, experiencias, emociones).
+- Si hay signos de interrogación (¿?) o palabras interrogativas, es SIEMPRE "help_request".
 - Si la respuesta es "Si" o "No", casi siempre es "help_request" porque es ambiguo y requiere clarificación.
 `;
 
@@ -1336,6 +1337,12 @@ REGLAS CRÍTICAS:
     // Validar respuesta de Gemini
     const validTypes = ['help_request', 'relationship_info', 'personal_info', 'story_response', 'casual', 'commercial', 'style_selection'];
     if (validTypes.includes(classification)) {
+      // ✅ CRÍTICO: Override de seguridad - doble verificación para preguntas obvias
+      const safetyOverride = classifyBasic(userMessage);
+      if (safetyOverride === 'help_request' && classification !== 'help_request') {
+        console.log('🛡️ SAFETY OVERRIDE: Gemini clasificó como', classification, 'pero override detectó help_request');
+        return 'help_request';
+      }
       return classification;
     }
     
@@ -1381,34 +1388,71 @@ async function callGeminiWithRetry(fn, tries = 2) {
   throw lastErr;
 }
 
-// CLASIFICACIÓN BÁSICA DE RESPALDO (MEJORADA)
+// CLASIFICACIÓN BÁSICA DE RESPALDO (MEJORADA) - VERSIÓN RESTAURADA
 function classifyBasic(message) {
-  const lowerMessage = message.toLowerCase().trim();  
-  // Override de seguridad: preguntas tienen máxima prioridad
-  if (lowerMessage.includes('?') || lowerMessage.includes('puedo') || 
-      lowerMessage.includes('se puede') || lowerMessage.includes('duda') || 
-      lowerMessage.includes('pregunta') || lowerMessage.includes('ayuda') ||
-      lowerMessage === 'si' || lowerMessage === 'no') { // <-- Añadido "si", "no"
-    console.log('🛡️ Override de seguridad: help_request (fallback)');
+  const lowerMessage = message.toLowerCase().trim();
+  
+  // ✅ MÁXIMA PRIORIDAD: Detección robusta de preguntas/dudas
+  // Signos de interrogación directos
+  if (lowerMessage.includes('¿') || lowerMessage.includes('?')) {
+    console.log('🛡️ Override de seguridad: help_request (signos interrogación)');
+    return 'help_request';
+  }
+  
+  // Palabras interrogativas (cuánto, cuándo, cómo, etc.)
+  const interrogatives = ['cuánto', 'cuándo', 'cómo', 'qué', 'dónde', 'por qué', 'para qué', 'quién'];
+  if (interrogatives.some(word => lowerMessage.includes(word))) {
+    console.log('🛡️ Override de seguridad: help_request (palabras interrogativas)');
+    return 'help_request';
+  }
+  
+  // Palabras clave de preguntas comerciales/técnicas
+  const helpKeywords = [
+    'precio', 'cuesta', 'costo', 'cuánto cuesta', 'vale',
+    'puedo', 'se puede', 'duda', 'pregunta', 'ayuda', 
+    'información', 'más info', 'detalles', 'explicación',
+    'entrega', 'envío', 'demora', 'tiempo', 'varios libros',
+    'al mismo tiempo', 'a la vez', 'simultáneamente'
+  ];
+  
+  if (helpKeywords.some(keyword => lowerMessage.includes(keyword))) {
+    console.log('🛡️ Override de seguridad: help_request (palabras clave)');
+    return 'help_request';
+  }
+  
+  // Respuestas ambiguas que requieren clarificación
+  if (lowerMessage === 'si' || lowerMessage === 'sí' || lowerMessage === 'no') {
+    console.log('🛡️ Override de seguridad: help_request (respuesta ambigua)');
     return 'help_request';
   }
   
   // Detección de relaciones
-  if (lowerMessage.includes('hermana') || lowerMessage.includes('hermano') ||
-      lowerMessage.includes('pareja') || lowerMessage.includes('madre') ||
-      lowerMessage.includes('padre') || lowerMessage.includes('hijo') ||
-      lowerMessage.includes('amigo') || lowerMessage.includes('amiga')) {
+  const relationKeywords = ['hermana', 'hermano', 'pareja', 'novio', 'novia', 
+                           'madre', 'padre', 'mamá', 'papá', 'hijo', 'hija',
+                           'amigo', 'amiga', 'primo', 'prima', 'tío', 'tía'];
+  if (relationKeywords.some(rel => lowerMessage.includes(rel))) {
     return 'relationship_info';
   }
   
-  if (lowerMessage.includes('hola') || lowerMessage.includes('cómo estás')) {
+  // Saludos casuales
+  if (lowerMessage.includes('hola') || lowerMessage.includes('buenas') || 
+      lowerMessage.includes('cómo estás') || lowerMessage.includes('qué tal')) {
     return 'casual';
   }
   
-  if (lowerMessage.includes('precio') || lowerMessage.includes('cuánto') || lowerMessage.includes('cuesta')) {
-    return 'commercial';
+  // Información personal (nombres, emails, géneros)
+  if (lowerMessage.includes('@') || lowerMessage.includes('me llamo') || 
+      lowerMessage.includes('soy') || lowerMessage.includes('masculino') || 
+      lowerMessage.includes('femenino')) {
+    return 'personal_info';
   }
   
+  // Selección de estilo
+  if (lowerMessage.includes('estilo') && (lowerMessage.includes('a') || lowerMessage.includes('b'))) {
+    return 'style_selection';
+  }
+  
+  console.log('🔄 Clasificación fallback: story_response');
   return 'story_response'; // Por defecto, asume que es una respuesta a una pregunta del flujo
 }
 // FUNCIÓN PRINCIPAL DE PROCESAMIENTO CONVERSACIONAL
@@ -1968,6 +2012,52 @@ console.log('🔎 GREETING pre-check', { queryType, relFromNlp, relFromHeu, rela
   // responseMeta ya declarado al inicio
 
   if (currentStep === 'questions') {
+    // ✅ CRÍTICO: Manejar help_request en questions step
+    if (queryType === 'help_request') {
+      console.log('🆘 help_request detectado durante questions step');
+      responseText = await handleUserQuestion(userMessage, conversationState, env.GEMINI_API_KEY);
+      newStep = currentStep; // Mantener step actual
+      
+      // Empaquetamiento inmediato para evitar procesamiento adicional
+      await persistTurn(env, ctx, {
+        sessionId,
+        userMessage,
+        assistantMessage: responseText,
+        state: {
+          currentStep: newStep,
+          relationshipType,
+          userData,
+          questionIndex,
+          queryType,
+          responseTime: Date.now() - startTime
+        }
+      });
+
+      return {
+        taleResponse: {
+          response_text: responseText,
+          previewData: null,
+          showPreview: false,
+          isComplete: false
+        },
+        newState: {
+          step: newStep,
+          currentStep: newStep,
+          relationshipType,
+          relationshipTypeMapped: mapRelationshipTypeForMake(relationshipType),
+          userData,
+          conversationHistory: [
+            ...conversationHistory.slice(-5),
+            { type: 'user', content: userMessage },
+            { type: 'assistant', content: responseText }
+          ],
+          currentQuestionIndex: questionIndex
+        },
+        sessionId,
+        isComplete: false
+      };
+    }
+
     // 🔜 Enriquecimiento: acumular y validar longitud mínima (A)
     const trimmed = (userMessage || '').trim();
     // Blindaje: relación segura para acceder a configuración y targets
@@ -2495,6 +2585,51 @@ async function persistTurn(env, ctx, { sessionId, userMessage, assistantMessage,
     console.error('❌ Error en persistTurn:', err);
   }
 }
+
+// ✅ FALLBACK FINAL PARA processConversationalMessage - AGREGADO POR RESTAURACIÓN
+// Esta función debe retornar antes que handleUserQuestion, no después del persistTurn
+// Agregamos el return statement que faltaba:
+
+// FINAL RETURN para processConversationalMessage (se ejecuta si no se manejó en ningún step específico)
+await persistTurn(env, ctx, {
+  sessionId,
+  userMessage,
+  assistantMessage: responseText || '¡Hola! ¿En qué puedo ayudarte?',
+  state: {
+    currentStep: newStep || currentStep,
+    relationshipType,
+    userData,
+    questionIndex,
+    queryType: queryType || 'casual',
+    responseTime: Date.now() - startTime
+  }
+});
+
+return {
+  taleResponse: {
+    response_text: responseText || '¡Hola! ¿En qué puedo ayudarte?',
+    previewData: null,
+    showPreview: false,
+    isComplete: false
+  },
+  newState: {
+    step: newStep || currentStep,
+    currentStep: newStep || currentStep,
+    relationshipType,
+    relationshipTypeMapped: mapRelationshipTypeForMake(relationshipType),
+    userData,
+    conversationHistory: [
+      ...conversationHistory.slice(-5),
+      { type: 'user', content: userMessage },
+      { type: 'assistant', content: responseText || '¡Hola! ¿En qué puedo ayudarte?' }
+    ],
+    currentQuestionIndex: questionIndex
+  },
+  sessionId,
+  isComplete: false
+};
+} // ✅ FIN de processConversationalMessage
+
 // MANEJAR PREGUNTAS DEL USUARIO (VERSIÓN HÍBRIDA MEJORADA)
 async function handleUserQuestion(userMessage, conversationState, apiKey) {
   const currentStep = conversationState.step || conversationState.currentStep || 'greeting';
@@ -2628,5 +2763,4 @@ function mapRelationshipTypeForMake(relationshipType) {
     'amigo': 'friend'
   };
   return mapping[relationshipType] || relationshipType;
-}
 }
